@@ -31,7 +31,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
-    <Compile Include="public\javascripts\AngularApp.js" />
+    <Content Include="bower.json" />
+    <Content Include="public\javascripts\AngularApp.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />

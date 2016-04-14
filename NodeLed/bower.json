@@ -1,0 +1,24 @@
+{
+  "name": "NodeLed",
+  "description": "NodeLed",
+  "main": "app.js",
+  "authors": [
+    "Adam Chamberlain"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "Led"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "resolutions": {
+    "angular": "1.5.3"
+  }
+}

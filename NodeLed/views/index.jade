@@ -4,8 +4,10 @@ block content
   h1= title
   p Welcome to #{title}
 
-  div(ng-controller='myCtrl')
+  div(ng-view)
 
-    span {{firstName}}
-    br
-    span {{lastName}}
+      div(ng-controller='myCtrl')
+
+        span {{firstName}}
+        br
+        span {{lastName}}
