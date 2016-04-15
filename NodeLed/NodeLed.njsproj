@@ -32,7 +32,8 @@
   <ItemGroup>
     <Compile Include="app.js" />
     <Content Include="bower.json" />
-    <Content Include="public\javascripts\AngularApp.js" />
+    <Content Include="public\javascripts\nodeledApp.js" />
+    <Content Include="public\javascripts\ledController.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
@@ -40,8 +41,8 @@
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="README.md" />
     <Content Include="views\index.jade" />
-    <Content Include="views\layout.jade" />
     <Content Include="views\error.jade" />
+    <Content Include="views\leds.jade" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
