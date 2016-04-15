@@ -4,8 +4,7 @@ nodeledApp.controller('ledController', function ($scope) {
     $scope.name = "Adam";
 
     $scope.leds = { "Row1": [ {"id": 1,"rgb":"#fffff"},{"id": 2,"rgb":"#fffff"} ],
-                    "Row2": [ {"id": 3,"rgb":"#fffff"},{"id": 4,"rgb":"#fffff"} ]
-    };
+                    "Row2": [ {"id": 3,"rgb":"#fffff"},{"id": 4,"rgb":"#fffff"} ]};
 
 
 });
