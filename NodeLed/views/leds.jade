@@ -1,0 +1,13 @@
+﻿div(ng-controller="ledController")
+    span Leds page goes here
+    br
+    br
+    span {{name}}
+    br
+    br
+    table(class='')
+        tbody()
+            tr(ng-repeat='ledrow in leds')
+                td(ng-repeat='led in ledrow') {{ led.id }} 
+                    input(id='{{led.id}}' value='{{led.yep}}' width='10')
+                
