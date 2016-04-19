@@ -2,12 +2,22 @@
 nodeledApp.controller('ledController', function ($scope) {
 
     $scope.name = "Adam";
+    numRows = 10;
+    numCols = 12;
+    $scope.leds = [];
+    ledNumber = 0;
 
-    $scope.leds = { "Row1": [ {"id": 1,"rgb":"#fffff"},{"id": 2,"rgb":"#fffff"} ],
-        "Row2": [{ "id": 3, "rgb": "#fffff" }, { "id": 4, "rgb": "#fffff" }],
-        "Row3": [{ "id": 5, "rgb": "#fffff" }, { "id": 6, "rgb": "#fffff" }]
-
-    };
-
+    for (a=0;a < numRows;a++)
+    {
+        var data = [];
+        for(b=0;b < numCols; b++)
+        {
+            data.push({
+                "id": ledNumber, "rgb": "#fffff"
+            });
+            ledNumber++;
+        }
+        $scope.leds.push(data);     
+    }
 
 });
