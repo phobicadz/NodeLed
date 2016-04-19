@@ -13,11 +13,13 @@ nodeledApp.controller('ledController', function ($scope) {
         for(b=0;b < numCols; b++)
         {
             data.push({
-                "id": ledNumber, "rgb": "#fffff"
+                "id": ledNumber, "rgb": "#fffff", "yep" : isOdd(a)
             });
             ledNumber++;
         }
         $scope.leds.push(data);     
     }
+
+    function isOdd(num) { return (num % 2) == 1; }
 
 });
