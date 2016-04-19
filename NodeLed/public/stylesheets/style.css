@@ -5,3 +5,11 @@ body {
 a {
   color: #00b7ff;
 }
+
+tr td {
+    width:10px;
+}
+
+input {
+    width:25px;
+}
