@@ -5,5 +5,10 @@
         tbody()
             tr(ng-repeat='ledrow in leds')
                 td(ng-repeat='led in ledrow') {{ led.id }} 
-                    input(id='{{led.id}}' value='{{led.yep}}')
+                    input(id='{{led.id}}' ng-model='led.rgb')
+    br
+    input(ng-click='suck()' type='button' value='click Me' width='30px')
+    br
+    br
+    input(type='text' ng-model='leds[0]')
                 

@@ -5,11 +5,9 @@ body {
 a {
   color: #00b7ff;
 }
-
-tr td {
-    width:10px;
+td {
+  width: 15px;
 }
-
-input {
-    width:25px;
+input[style=text] {
+  width: 15px;
 }
