@@ -4,8 +4,8 @@
     table(class='')
         tbody()
             tr(ng-repeat='ledrow in leds')
-                td(ng-repeat='led in ledrow') {{ led.id }} 
-                    input(id='{{led.id}}' ng-model='led.rgb')
+                td(ng-repeat='led in ledrow') 
+                    color-picker(id='{{led.id}}' ng-model='led.rgb' color-picker-swatch-only="true" color-picker-format="'rgb'" color-picker-alpha="true") 
     br
     input(ng-click='suck()' type='button' value='click Me' width='30px')
     br

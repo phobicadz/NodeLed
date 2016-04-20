@@ -16,14 +16,14 @@ nodeledApp.controller('ledController', function ($scope) {
             if (isOdd(a))
             {
                 data.push({
-                    "id": oddIndex, "rgb": "#fffff", "yep": isOdd(a)
+                    "id": oddIndex, "rgb": "#000000", "yep": isOdd(a)
                 });
                 oddIndex--;
             }
             else
             {
                 data.push({
-                    "id": ledNumber, "rgb": "#fffff", "yep": isOdd(a)
+                    "id": ledNumber, "rgb": "#000000", "yep": isOdd(a)
                 });
             }      
             ledNumber++;
