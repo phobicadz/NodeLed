@@ -6,8 +6,6 @@ a {
   color: #00b7ff;
 }
 td {
-  width: 15px;
-}
-input[style=text] {
-  width: 15px;
+  width: 30px;
+  height: 30px;
 }

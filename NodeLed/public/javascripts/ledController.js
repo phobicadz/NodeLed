@@ -6,8 +6,9 @@ nodeledApp.controller('ledController', function ($scope) {
     numCols = 12;
     $scope.leds = [];
     ledNumber = 0;
+    $scope.selectedColour;
 
-    for (a=0;a < numRows;a++)
+    for(a=0;a < numRows;a++)
     {
         var data = [];
         var oddIndex = ledNumber + (numCols-1);
@@ -44,6 +45,11 @@ nodeledApp.controller('ledController', function ($scope) {
         // sort to so it will be sent in as one string
         $scope.leds[1].sort(predicateBy("id"));
 
+    }
+
+    $scope.tdclick = function(el) {
+      
+        el.led.rgb = $scope.selectedColour;
     }
 
     // uses predicate function for sorting much like .Net
