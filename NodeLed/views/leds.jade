@@ -1,5 +1,5 @@
 ﻿div(ng-controller="ledController")
-    span Leds page goes here
+    span Edit Leds
     br
     table(drag-select drag-select-ids="ids")
         tbody()
@@ -7,10 +7,14 @@
                 td(ng-repeat='led in ledrow' ng-style='{ "background-color" : led.rgb}' ng-model='led.rgb' id='{{led.id}}' ng-click='tdclick(this)')
                      
     br
-    input(ng-click='suck()' type='button' value='click Me' width='30px')
-    br
-    br
     color-picker(id="colorPicker1" color-picker-swatch-only="true" color-picker-format="'rgb'" color-picker-alpha="false" ng-model="selectedColour") 
+    | Colour Picker
     br
     br
-    input(type='textarea' ng-model='dataPacket')
+    input(ng-click='suck()' type='button' value='Send' width='30px')
+    br
+    br
+    input(type='input' ng-model='brightness' style='width:20px')
+    br
+    br
+    textarea(ng-model='ledstring' rows='6' cols='70' )
