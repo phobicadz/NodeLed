@@ -45,8 +45,7 @@ nodeledApp.controller('ledController', function ($scope,$http) {
 
     $scope.selectLeds = function()
     {
-        //  alert($scope.dataPacket.length);
-        // now send this leds via http
+       // get leds using selected id (first of mutliple selections)
         $http({
             url: 'http://adamandlindsey.co.uk:3000/test/example1/' + $scope.selectedName[0]._id,
             method: 'GET',
@@ -64,8 +63,9 @@ nodeledApp.controller('ledController', function ($scope,$http) {
 
     $scope.suck = function()
     {
-        // sort to so it will be sent in as one string
-        // $scope.leds[1].sort(predicateBy("id"));
+       
+        // send and save
+
         $scope.dataPacket = "";
         $scope.ledstring = JSON.stringify($scope.leds,["ledpage","id","rgb"]);
 
