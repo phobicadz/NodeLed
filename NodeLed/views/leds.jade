@@ -1,9 +1,11 @@
 ﻿div(ng-controller="ledController")
     span Edit Leds
     br
+    input(id="ledpageName" ng-model="leds.Name")
+    br
     table(drag-select drag-select-ids="ids")
         tbody()
-            tr(ng-repeat='ledrow in leds')
+            tr(ng-repeat='ledrow in leds.ledpage')
                 td(ng-repeat='led in ledrow' ng-style='{ "background-color" : led.rgb}' ng-model='led.rgb' id='{{led.id}}' ng-click='tdclick(this)')
                      
     br
@@ -18,3 +20,6 @@
     br
     br
     textarea(ng-model='dataPacket' rows='6' cols='70' )
+    br
+    br
+    select(ng-model='selectedName' ng-options="x.Name for x in ledlist" ng-click="selectLeds()" multiple="multiple")
