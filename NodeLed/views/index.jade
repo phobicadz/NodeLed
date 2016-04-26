@@ -2,19 +2,20 @@
 html
   head
     title=title
+    meta(name="viewport" content="width=device-width, initial-scale=1")
     link(rel="stylesheet" href="/angularjs-color-picker/dist/angularjs-color-picker.min.css")
+    link(rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css")
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(src="/jquery/dist/jquery.min.js")
     script(src='/angular/angular.js')
     script(src='/angular-route/angular-route.js')
     script(src="/tinycolor2/dist/tinycolor-min.js")
     script(src="/angularjs-color-picker/dist/angularjs-color-picker.min.js")
+    script(src="/bootstrap/dist/js/bootstrap.min.js")
     script(src='/javascripts/nodeledApp.js')
     script(src='/javascripts/ledController.js')
     
   body(ng-app='NodeLed')
-    h1= title
- 
     div(ng-view)
 
    

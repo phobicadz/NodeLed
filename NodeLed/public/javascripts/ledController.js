@@ -1,45 +1,63 @@
 ﻿// should define this in seperate file as each controller should have one
 nodeledApp.controller('ledController', function ($scope,$http) {
     numRows = 10; numCols = 12; ledNumber = 0;
-    $scope.leds = { "ledpage": [], "Name" : "" };
-    $scope.selectedColour = {Color1:"",Color2:"",Color3:"",Color4:""};
+    $scope.leds = { "ledpage": [], "Name": "", "selectedColour": {"Color1":"","Color2":"","Color3":"","Color4":""} };
     $scope.currentColour = "";
     $scope.brightness = 31;
     $scope.dataPacket = "";
     $scope.ledstring = "";
     $scope.ledlist = [];
 
-    for (a = 0; a < numRows; a++) {
-        var data = [];
-        for (b = 0; b < numCols; b++) {
-            data.push({
-                "id": ledNumber, "rgb": "rgb(0,0,0)"
-            });
-            ledNumber++;
-        }
-        $scope.leds.ledpage.push(data);
+    function GetLedList() {
+        //  alert($scope.dataPacket.length);
+        // now send this leds via http
+        $http({
+            url: 'http://adamandlindsey.co.uk:3000/test/example1/?fields=["Name"]',
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+
+            //   headers: {'Content-Type':'application/text'}
+        }).success(function (data, status, headers, config) {
+            //    alert(data);
+            $scope.ledlist = data;
+
+        }).error(function (data, status, headers, config) {
+            // alert("error");
+        });
     }
-
-    //  alert($scope.dataPacket.length);
-    // now send this leds via http
-    $http({
-        url: 'http://adamandlindsey.co.uk:3000/test/example1/?fields=["Name"]',
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
-
-        //   headers: {'Content-Type':'application/text'}
-    }).success(function (data, status, headers, config) {
-        //    alert(data);
-        $scope.ledlist = data;
-
-    }).error(function (data, status, headers, config) {
-        // alert("error");
-    });
 
     function isOdd(num) {
         return (num % 2) == 1;
     }
 
+    function ClearPage() {
+        $scope.leds.ledpage = [];
+
+        for (a = 0; a < numRows; a++) {
+            var data = [];
+            for (b = 0; b < numCols; b++) {
+                data.push({
+                    "id": ledNumber, "rgb": "rgb(0,0,0)"
+                });
+                ledNumber++;
+            }
+            $scope.leds.ledpage.push(data);
+        }
+    }
+
+    // uses predicate function for sorting much like .Net
+    function predicateBy(prop) {
+        return function (a, b) {
+            return b[prop] - a[prop];
+        }
+    }
+
+    // Initial function calls
+    ClearPage();
+    GetLedList();
+
+
+    // Controller functions ------------------------------------------------------
     $scope.selectLeds = function()
     {
        // get leds using selected id (first of mutliple selections)
@@ -52,7 +70,6 @@ nodeledApp.controller('ledController', function ($scope,$http) {
         }).success(function (data, status, headers, config) {
             //    alert(data);
             $scope.leds = data;
-
         }).error(function (data, status, headers, config) {
             alert("error getting data for id:" + $scope.selectedName[0]._id);
         });
@@ -60,7 +77,6 @@ nodeledApp.controller('ledController', function ($scope,$http) {
 
     $scope.suck = function()
     {
-       
         // send and save
 
         $scope.dataPacket = "";
@@ -103,12 +119,12 @@ nodeledApp.controller('ledController', function ($scope,$http) {
         $http({
             url: 'http://adamandlindsey.co.uk:3000/test/example1',
             method: 'POST',
-            data: JSON.stringify($scope.leds, ["ledpage", "id", "rgb", "Name"]),
+            data: JSON.stringify($scope.leds, ["ledpage", "id", "rgb", "Name","selectedColour","Color1","Color2","Color3","Color4"]),
             headers: { 'Content-Type': 'application/json' }
 
             //   headers: {'Content-Type':'application/text'}
         }).success(function (data, status, headers, config) {
-            alert("successfully saved");
+            GetLedList();
         }).error(function (data, status, headers, config) {
             // alert("error");
         });
@@ -126,7 +142,8 @@ nodeledApp.controller('ledController', function ($scope,$http) {
         }).success(function (data, status, headers, config) {
             //    alert(data);
             // $scope.leds = data;
-            $scope.ledlist
+            $scope.ledlist.splice(drpPages.selectedIndex, 1);
+            ClearPage();
 
         }).error(function (data, status, headers, config) {
             alert("error getting data for id:" + $scope.selectedName[0]._id);
@@ -152,13 +169,6 @@ nodeledApp.controller('ledController', function ($scope,$http) {
     $scope.selectColour = function (color)
     {
         $scope.currentColour = color;
-    }
-
-    // uses predicate function for sorting much like .Net
-    function predicateBy(prop) {
-        return function (a, b) {
-            return b[prop] - a[prop];
-        }
     }
 
 });
