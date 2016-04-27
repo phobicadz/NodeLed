@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "angular": "^1.5.3",
+    "angular-ui-bootstrap": "^1.3.2",
+    "angular-winjs": "^4.4.0",
     "angularjs-color-picker": "^1.0.3",
     "body-parser": "~1.8.1",
     "bootstrap": "^3.3.6",

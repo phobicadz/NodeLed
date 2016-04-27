@@ -1,24 +1,33 @@
 ﻿div(ng-controller="ledController")
  div(class="container")
     div(class="row")
-        div(class="col-sm-6")   
-            table(style="width:100%")
-                tbody()
-                    tr(ng-repeat='ledrow in leds.ledpage')
-                        td(ng-repeat='led in ledrow' ng-style='{ "background-color" : led.rgb}' ng-model='led.rgb' id='{{led.id}}' ng-click='tdclick(this)')                  
-        div(class="col-sm-5")
-            br
-            table
-                tr
-                    td
-                        color-picker(id="colorPicker1" color-picker-swatch-only="true" color-picker-format="'rgb'" color-picker-alpha="false" ng-model="leds.selectedColour.Color1" color-picker-on-change="onColorChange($event, color)" ng-click="selectColour(leds.selectedColour.Color1)")
-                    td
-                        color-picker(id="colorPicker2" color-picker-swatch-only="true" color-picker-format="'rgb'" color-picker-alpha="false" ng-model="leds.selectedColour.Color2" color-picker-on-change="onColorChange($event, color)" ng-click="selectColour(leds.selectedColour.Color2)")
-                    td
-                        color-picker(id="colorPicker3" color-picker-swatch-only="true" color-picker-format="'rgb'" color-picker-alpha="false" ng-model="leds.selectedColour.Color3" color-picker-on-change="onColorChange($event, color)" ng-click="selectColour(leds.selectedColour.Color3)")
-                    td
-                        color-picker(id="colorPicker4" color-picker-swatch-only="true" color-picker-format="'rgb'" color-picker-alpha="false" ng-model="leds.selectedColour.Color4" color-picker-on-change="onColorChange($event, color)" ng-click="selectColour(leds.selectedColour.Color4)")
-            br
+        div(class="col-sm-6")
+            div   
+                table
+                    tbody
+                        tr(ng-repeat='ledrow in leds.ledpage')
+                            td(ng-repeat='led in ledrow' ng-style='{ "background-color" : led.rgb}' ng-model='led.rgb' id='{{led.id}}' ng-click='tdclick(this)')
+               
+                br
+                br
+                table
+                    tr
+                        td
+                            color-picker(id="colorPicker1" color-picker-swatch-only="true" color-picker-format="'rgb'" color-picker-alpha="false" ng-model="leds.selectedColour.Color1" color-picker-on-change="onColorChange($event, color)" ng-click="selectColour(leds.selectedColour.Color1)")
+                        td
+                            color-picker(id="colorPicker2" color-picker-swatch-only="true" color-picker-format="'rgb'" color-picker-alpha="false" ng-model="leds.selectedColour.Color2" color-picker-on-change="onColorChange($event, color)" ng-click="selectColour(leds.selectedColour.Color2)")
+                        td
+                            color-picker(id="colorPicker3" color-picker-swatch-only="true" color-picker-format="'rgb'" color-picker-alpha="false" ng-model="leds.selectedColour.Color3" color-picker-on-change="onColorChange($event, color)" ng-click="selectColour(leds.selectedColour.Color3)")
+                        td
+                            color-picker(id="colorPicker4" color-picker-swatch-only="true" color-picker-format="'rgb'" color-picker-alpha="false" ng-model="leds.selectedColour.Color4" color-picker-on-change="onColorChange($event, color)" ng-click="selectColour(leds.selectedColour.Color4)")
+                br
+                label Saved Pages
+                win-list-view(id="myListView" item-data-source="ledlist" selection="selection" items-reorderable="false" win-control="listView")     
+                    win-item-template(class="miniTemp")
+                        img(src="images/instagram.png" style="width:20px;height:20px")
+                        &nbsp;{{ item.data.Name }}
+                br               
+        div(class="col-sm-4")          
             input(ng-click='suck()' type='button' value='Send' class="btn btn-default") 
             &nbsp;
             input(ng-click='save()' type='button' value='Save' class="btn btn-default")
@@ -32,8 +41,6 @@
             label(for='txtBrightness') Brightness 
             input(type='input' ng-model='brightness' id='txtBrightness' class="form-control")
             br
-            label(for='drpPages') Saved Pages
-            select(id='drpPages' ng-model='selectedName' ng-options="x.Name for x in ledlist" ng-click="selectLeds()" multiple="multiple" style="width:100%;height:150px" class="form-control")
-            br
             label(for='txtRaw') Raw Data
             textarea(ng-model='dataPacket' rows='3' cols='40' style="width:100%" class="form-control" id="txtRaw" )
+            br

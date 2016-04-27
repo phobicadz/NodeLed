@@ -32,6 +32,8 @@
   <ItemGroup>
     <Compile Include="app.js" />
     <Content Include="bower.json" />
+    <Content Include="public\images\homer.gif" />
+    <Content Include="public\images\instagram.png" />
     <Content Include="public\javascripts\nodeledApp.js" />
     <Content Include="public\javascripts\ledController.js" />
     <Compile Include="routes\index.js" />

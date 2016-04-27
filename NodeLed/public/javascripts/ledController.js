@@ -1,5 +1,4 @@
-﻿// should define this in seperate file as each controller should have one
-nodeledApp.controller('ledController', function ($scope,$http) {
+﻿nodeledApp.controller('ledController', function ($scope,$http) {
     numRows = 10; numCols = 12; ledNumber = 0;
     $scope.leds = { "ledpage": [], "Name": "", "selectedColour": {"Color1":"","Color2":"","Color3":"","Color4":""} };
     $scope.currentColour = "";
@@ -7,22 +6,18 @@ nodeledApp.controller('ledController', function ($scope,$http) {
     $scope.dataPacket = "";
     $scope.ledstring = "";
     $scope.ledlist = [];
-
+    $scope.selection = [];
+    $scope.index = "";
+ 
     function GetLedList() {
-        //  alert($scope.dataPacket.length);
-        // now send this leds via http
         $http({
             url: 'http://adamandlindsey.co.uk:3000/test/example1/?fields=["Name"]',
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }
-
-            //   headers: {'Content-Type':'application/text'}
-        }).success(function (data, status, headers, config) {
-            //    alert(data);
+        }).success(function (data, status, headers, config) {        
             $scope.ledlist = data;
-
         }).error(function (data, status, headers, config) {
-            // alert("error");
+
         });
     }
 
@@ -56,97 +51,77 @@ nodeledApp.controller('ledController', function ($scope,$http) {
     ClearPage();
     GetLedList();
 
-
     // Controller functions ------------------------------------------------------
-    $scope.selectLeds = function()
+    function selectLeds()
     {
        // get leds using selected id (first of mutliple selections)
         $http({
-            url: 'http://adamandlindsey.co.uk:3000/test/example1/' + $scope.selectedName[0]._id,
+            url: 'http://adamandlindsey.co.uk:3000/test/example1/' + $scope.index,
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }
-
-            //   headers: {'Content-Type':'application/text'}
         }).success(function (data, status, headers, config) {
-            //    alert(data);
             $scope.leds = data;
         }).error(function (data, status, headers, config) {
-            alert("error getting data for id:" + $scope.selectedName[0]._id);
+            alert("error getting data for id:" + $scope.index)
         });
     }
+    $scope.selectLeds = selectLeds;
 
     $scope.suck = function()
     {
         // send and save
-
         $scope.dataPacket = "";
         $scope.ledstring = JSON.stringify($scope.leds,["ledpage","id","rgb"]);
-
         // build string of data to send from array
         for (a = 0; a < numRows; a++) {
             var ledrow = Object.assign([], $scope.leds.ledpage[a]);
-
             if (isOdd(a)) {         
                 ledrow.sort(predicateBy("id"));
-            }
-           
+            }        
             for (b = 0; b < numCols; b++) {
                 var color = tinycolor(ledrow[b].rgb);
                 $scope.dataPacket += $scope.brightness + "," + color.toRgb().b + "," + color.toRgb().g + ","  + color.toRgb().r + ","
             }
         }
-
-      //  alert($scope.dataPacket.length);
-        // now send this leds via http
         $http({
             url: 'http://192.168.0.18/api/leds',
             method: 'POST',
             data: $scope.dataPacket.slice(0, -1),
             headers: { 'Content-Type': 'text/plain' }
-
-         //   headers: {'Content-Type':'application/text'}
         }).success(function (data,status,headers,config) {
-         //   alert("success");
+    
         }).error(function (data,status,headers,config) {
-           // alert("error");
+           
         });
     }
 
     $scope.save = function ()
     {
-        //  alert($scope.dataPacket.length);
-        // now send this leds via http
         $http({
             url: 'http://adamandlindsey.co.uk:3000/test/example1',
             method: 'POST',
             data: JSON.stringify($scope.leds, ["ledpage", "id", "rgb", "Name","selectedColour","Color1","Color2","Color3","Color4"]),
             headers: { 'Content-Type': 'application/json' }
-
-            //   headers: {'Content-Type':'application/text'}
         }).success(function (data, status, headers, config) {
             GetLedList();
         }).error(function (data, status, headers, config) {
-            // alert("error");
+      
         });
     }
 
-    $scope.delete = function ()
+    $scope.delete = function()
     {
         // get leds using selected id (first of mutliple selections)
         $http({
-            url: 'http://adamandlindsey.co.uk:3000/test/example1/' + $scope.selectedName[0]._id,
+            url: 'http://adamandlindsey.co.uk:3000/test/example1/' + $scope.index,
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' }
-
-            //   headers: {'Content-Type':'application/text'}
         }).success(function (data, status, headers, config) {
-            //    alert(data);
-            // $scope.leds = data;
-            $scope.ledlist.splice(drpPages.selectedIndex, 1);
+            //   $scope.ledlist.splice(drpPages.selectedIndex, 1);
+            GetLedList();
             ClearPage();
-
         }).error(function (data, status, headers, config) {
-            alert("error getting data for id:" + $scope.selectedName[0]._id);
+  
         });
     }
 
@@ -170,5 +145,14 @@ nodeledApp.controller('ledController', function ($scope,$http) {
     {
         $scope.currentColour = color;
     }
+
+    function handler(eventInfo) {
+        $scope.index = eventInfo.detail.itemPromise._value.data._id;
+        selectLeds();
+    };
+
+    $scope.$on('$routeChangeSuccess', function () {
+        $scope.listView.oniteminvoked = handler;
+    });
 
 });
