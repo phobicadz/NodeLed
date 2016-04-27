@@ -1,4 +1,4 @@
-﻿var nodeledApp = angular.module('NodeLed', ['ngRoute','color.picker','winjs']);
+﻿var nodeledApp = angular.module('NodeLed', ['ngRoute','color.picker','winjs','colorpicker.module']);
 
 nodeledApp.config(['$routeProvider', function ($routerProvider) {
         $routerProvider.

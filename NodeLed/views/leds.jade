@@ -6,10 +6,10 @@
                 table
                     tbody
                         tr(ng-repeat='ledrow in leds.ledpage')
-                            td(ng-repeat='led in ledrow' ng-style='{ "background-color" : led.rgb}' ng-model='led.rgb' id='{{led.id}}' ng-click='tdclick(this)')
-               
+                            td(ng-repeat='led in ledrow' ng-style='{ "background-color" : led.rgb}' ng-model='led.rgb' id='{{led.id}}' ng-click='tdclick(this)')               
                 br
                 br
+                input(colorpicker="rgb" type="text" ng-model="leds.selectedColour.Color1")
                 table
                     tr
                         td
@@ -44,3 +44,4 @@
             label(for='txtRaw') Raw Data
             textarea(ng-model='dataPacket' rows='3' cols='40' style="width:100%" class="form-control" id="txtRaw" )
             br
+          
