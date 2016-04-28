@@ -142,6 +142,7 @@
 
     $scope.add = function()
     {
+        $scope.leds.Name = "New Page";
         $http({
             url: 'http://adamandlindsey.co.uk:3000/test/example1',
             method: 'POST',
