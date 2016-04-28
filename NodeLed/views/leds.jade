@@ -21,7 +21,7 @@
                             color-picker(id="colorPicker4" color-picker-swatch-only="false" color-picker-format="'rgb'" color-picker-alpha="false" ng-model="leds.selectedColour.Color4" color-picker-on-change="onColorChange($event, color)" ng-click="selectColour(leds.selectedColour.Color4)")
                 br
                 label Saved Pages
-                win-list-view(id="myListView" class="win-selectionstylefilled" item-data-source="ledlist" selection="selection" items-reorderable="false" win-control="listView" tap-behavior="'directSelect'" selection-mode="'single'")     
+                win-list-view(id="myListView" class="win-listview win-selectionstylefilled" item-data-source="ledlist" selection="selection" items-reorderable="false" win-control="listView" tap-behavior="'directSelect'" selection-mode="'single'")     
                     win-item-template
                         div(class="miniTemp")
                             img(src="images/instagram.png" style="width:20px;height:20px")
@@ -30,6 +30,8 @@
                 br               
         div(class="col-sm-4")          
             input(ng-click='suck()' type='button' value='Send' class="btn btn-default") 
+            &nbsp;
+            input(ng-click='add()' type='button' value='Add' class="btn btn-default") 
             &nbsp;
             input(ng-click='save()' type='button' value='Save' class="btn btn-default")
             &nbsp;

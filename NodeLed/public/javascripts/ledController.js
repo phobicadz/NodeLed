@@ -98,14 +98,14 @@
     $scope.save = function ()
     {
         $http({
-            url: 'http://adamandlindsey.co.uk:3000/test/example1',
-            method: 'POST',
+            url: 'http://adamandlindsey.co.uk:3000/test/example1/' + $scope.index,
+            method: 'PUT',
             data: JSON.stringify($scope.leds, ["ledpage", "id", "rgb", "Name","selectedColour","Color1","Color2","Color3","Color4"]),
             headers: { 'Content-Type': 'application/json' }
         }).success(function (data, status, headers, config) {
             GetLedList();
         }).error(function (data, status, headers, config) {
-      
+            alert("Error trying to Save");
         });
     }
 
@@ -122,6 +122,20 @@
             ClearPage();
         }).error(function (data, status, headers, config) {
   
+        });
+    }
+
+    $scope.add = function()
+    {
+        $http({
+            url: 'http://adamandlindsey.co.uk:3000/test/example1',
+            method: 'POST',
+            data: JSON.stringify($scope.leds, ["ledpage", "id", "rgb", "Name", "selectedColour", "Color1", "Color2", "Color3", "Color4"]),
+            headers: { 'Content-Type': 'application/json' }
+        }).success(function (data, status, headers, config) {
+            GetLedList();
+        }).error(function (data, status, headers, config) {
+
         });
     }
 
