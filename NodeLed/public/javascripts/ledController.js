@@ -8,6 +8,21 @@
     $scope.ledlist = [];
     $scope.selection = [];
     $scope.index = "";
+    
+    var Mode = {
+        editMode: {
+            text: "edit",
+            selectionMode: "multi",
+            tapBehavior: "toggleSelect"
+        },
+        readOnly: {
+            text: "readonly",
+            selectionMode: "none",
+            tapBehavior: "none"
+        }
+    };
+
+    $scope.mode = Mode.readOnly;
  
     function GetLedList() {
         $http({
