@@ -1,6 +1,7 @@
 ﻿nodeledApp.controller('ledController', function ($scope,$http) {
     numRows = 10; numCols = 12; ledNumber = 0;
-    $scope.leds = { "ledpage": [], "Name": "", "selectedColour": { "Color1": "rgb(255,255,255)", "Color2": "rgb(255,255,255)", "Color3": "rgb(255,255,255)", "Color4": "rgb(255,255,255)" } };
+    newPage = { "ledpage": [], "Name": "NewPage", "selectedColour": { "Color1": "rgb(255,255,255)", "Color2": "rgb(255,255,255)", "Color3": "rgb(255,255,255)", "Color4": "rgb(255,255,255)" } };
+    $scope.leds = newPage;
     $scope.currentColour = "";
     $scope.brightness = 31;
     $scope.dataPacket = "";
@@ -142,7 +143,7 @@
 
     $scope.add = function()
     {
-        $scope.leds.Name = "New Page";
+        $scope.leds = newPage;
         $http({
             url: 'http://adamandlindsey.co.uk:3000/test/example1',
             method: 'POST',
