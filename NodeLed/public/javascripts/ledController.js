@@ -1,6 +1,6 @@
 ﻿nodeledApp.controller('ledController', function ($scope,$http) {
     numRows = 10; numCols = 12; ledNumber = 0;
-    $scope.leds = { "ledpage": [], "Name": "", "selectedColour": {"Color1":"","Color2":"","Color3":"","Color4":""} };
+    $scope.leds = { "ledpage": [], "Name": "", "selectedColour": { "Color1": "rgb(255,255,255)", "Color2": "rgb(255,255,255)", "Color3": "rgb(255,255,255)", "Color4": "rgb(255,255,255)" } };
     $scope.currentColour = "";
     $scope.brightness = 31;
     $scope.dataPacket = "";
