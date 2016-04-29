@@ -22,6 +22,12 @@ html(style='overflow:visible')
     script(src='/javascripts/ledController.js')
     
   body(ng-app='NodeLed')
+
+    // Menu goes here
+    div(id='menu' style="padding-bottom:10px")
+        a(href='#/leds') Led Grid
+  
     div(ng-view)
+
 
    

@@ -9,22 +9,7 @@
     $scope.ledlist = [];
     $scope.selection = [];
     $scope.index = "";
-    
-    var Mode = {
-        editMode: {
-            text: "edit",
-            selectionMode: "multi",
-            tapBehavior: "toggleSelect"
-        },
-        readOnly: {
-            text: "readonly",
-            selectionMode: "none",
-            tapBehavior: "none"
-        }
-    };
-
-    $scope.mode = Mode.readOnly;
- 
+  
     function GetLedList() {
         $http({
             url: 'http://adamandlindsey.co.uk:3000/test/example1/?fields=["Name"]',
@@ -157,9 +142,7 @@
     }
 
     $scope.tdclick = function (el) {
-
-        if (el.led.rgb == "rgb(0,0,0)")
-        {
+        if (el.led.rgb == "rgb(0,0,0)"){
             el.led.rgb = $scope.currentColour;
         }
         else {
@@ -167,13 +150,11 @@
         }     
     }
 
-    $scope.onColorChange = function ($event, color)
-    {
+    $scope.onColorChange = function ($event, color){
         $scope.currentColour = color;
     }
 
-    $scope.selectColour = function (color)
-    {
+    $scope.selectColour = function (color){
         $scope.currentColour = color;
     }
 
@@ -186,4 +167,21 @@
         $scope.listView.oniteminvoked = handler;
     });
 
+});
+
+// Please note that $uibModalInstance represents a modal window (instance) dependency.
+// It is not the same as the $uibModal service used above.
+nodeledApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items) {
+    $scope.items = items;
+    $scope.selected = {
+        item: $scope.items[0]
+    };
+
+    $scope.ok = function () {
+        $uibModalInstance.close($scope.selected.item);
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
 });
