@@ -8,6 +8,9 @@ nodeledApp.config(['$routeProvider', function ($routerProvider) {
         }).when('/menu', {
             templateUrl: '/views/menu.jade',
             controller: 'menuController'
+        }).when('/ledstrip', {
+            templateUrl: '/views/ledstrip.jade',
+            controller: 'ledstripController'
         }).otherwise({
             redirectTo: '/views/index.jade'
         });

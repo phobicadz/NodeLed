@@ -39,6 +39,7 @@
     <Compile Include="node_modules\angular-winjs\js\angular-winjs.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\users.js" />
+    <Content Include="views\ledstrip.jade" />
     <Content Include="views\menu.jade" />
     <None Include="bin\www" />
     <Content Include="package.json" />
