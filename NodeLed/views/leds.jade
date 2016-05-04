@@ -24,8 +24,9 @@
                 win-list-view(id="myListView" class="win-listview win-selectionstylefilled" item-data-source="ledlist" selection="selection" items-reorderable="false" win-control="listView" tap-behavior="'directSelect'" selection-mode="'single'")     
                     win-item-template
                         div(class="miniTemp")
-                            img(src="images/instagram.png" style="width:20px;height:20px")
-                            &nbsp;{{ item.data.Name }}
+                            span
+                                img(src="images/instagram.png" style="width:20px;height:20px")                         
+                                &nbsp;{{ item.data.Name }}
                     win-list-layout
                 br               
         div(class="col-sm-4")          

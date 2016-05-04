@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
+    <Folder Include="node_modules\" />
     <Folder Include="node_modules\angular-winjs\" />
     <Folder Include="node_modules\angular-winjs\js\" />
     <Folder Include="public\" />
