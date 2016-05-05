@@ -9,6 +9,8 @@
     $scope.ledlist = [];
     $scope.selection = [];
     $scope.index = "";
+    $scope.contentDialogHidden = true;
+
   
     function GetLedList() {
         $http({
@@ -84,7 +86,7 @@
                 $scope.dataPacket += $scope.brightness + "," + color.toRgb().b + "," + color.toRgb().g + ","  + color.toRgb().r + ","
             }
         }
-        // Possibly send to MQTT instead triggering NodeMCU to retrive from URI itself and multiple times in the case of animation
+        // TODO:Possibly send to MQTT instead triggering NodeMCU to retrive from URI itself and multiple times in the case of animation
         $http({
             url: 'http://192.168.0.18/api/leds',
             method: 'POST',
@@ -105,6 +107,7 @@
             data: JSON.stringify($scope.leds, ["ledpage", "id", "rgb", "Name","selectedColour","Color1","Color2","Color3","Color4"]),
             headers: { 'Content-Type': 'application/json' }
         }).success(function (data, status, headers, config) {
+            $scope.contentDialogHidden = false;
             GetLedList();    
         }).error(function (data, status, headers, config) {
             alert("Error trying to Save");
@@ -164,8 +167,13 @@
         selectLeds();
     };
 
+    $scope.dialogHandler = function (eventInfo) {
+        alert(eventInfo.detail.result);
+    };
+
     $scope.$on('$routeChangeSuccess', function () {
         $scope.listView.oniteminvoked = handler;
+        $scope.plopup.onafterhide = $scope.dialogHandler;
     });
 
 });
