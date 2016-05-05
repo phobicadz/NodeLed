@@ -168,7 +168,7 @@
     };
 
     $scope.dialogHandler = function (eventInfo) {
-        alert(eventInfo.detail.result);
+    //    alert(eventInfo.detail.result);
     };
 
     $scope.$on('$routeChangeSuccess', function () {
