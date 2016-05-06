@@ -107,7 +107,6 @@
             data: JSON.stringify($scope.leds, ["ledpage", "id", "rgb", "Name","selectedColour","Color1","Color2","Color3","Color4"]),
             headers: { 'Content-Type': 'application/json' }
         }).success(function (data, status, headers, config) {
-            $scope.contentDialogHidden = false;
             GetLedList();    
         }).error(function (data, status, headers, config) {
             alert("Error trying to Save");
@@ -115,8 +114,7 @@
     }
 
     $scope.delete = function()
-    {
-        // get leds using selected id (first of mutliple selections)
+    {    
         $http({
             url: 'http://adamandlindsey.co.uk:3000/test/example1/' + $scope.index,
             method: 'DELETE',
@@ -168,7 +166,10 @@
     };
 
     $scope.dialogHandler = function (eventInfo) {
-    //    alert(eventInfo.detail.result);
+        //    alert(eventInfo.detail.result);
+        if (eventInfo.detail.result == "primary") {
+            $scope.delete();
+        }  
     };
 
     $scope.$on('$routeChangeSuccess', function () {

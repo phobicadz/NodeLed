@@ -2,8 +2,8 @@
  div(class="container")
     div(class="row")
         div(class="col-sm-6")
-            win-content-dialog(primary-command-text="'Primary Command'" secondary-command-text="'Secondary Command'" title="'Title'" hidden="contentDialogHidden" win-control="plopup")
-                span Add your content here
+            win-content-dialog(primary-command-text="'Yes'" secondary-command-text="'Cancel'" title="'Warning'" hidden="contentDialogHidden" win-control="plopup")
+                span Are you sure you want to delete this page ?
             div   
                 table
                     tbody
@@ -38,7 +38,7 @@
             &nbsp;
             input(ng-click='save()' type='button' value='Save' class="btn btn-default")
             &nbsp;
-            input(ng-click='delete()' type='button' value='Delete' class="btn btn-danger")
+            input(ng-click='contentDialogHidden = false' type='button' value='Delete' class="btn btn-danger")
             br
             br          
             label(for='ledpageName') Name
