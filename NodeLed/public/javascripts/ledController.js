@@ -14,13 +14,13 @@
   
     function GetLedList() {
         $http({
-            url: 'http://adamandlindsey.co.uk:3000/test/example1/?fields=["Name"]',
+            url: 'http://localhost:4000/test/example1/?fields=["Name"]',
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }
         }).success(function (data, status, headers, config) {        
             $scope.ledlist = data;
         }).error(function (data, status, headers, config) {
-
+            alert("failure to retrive pages")
         });
     }
 
@@ -59,7 +59,7 @@
     {
        // get leds using selected id (first of mutliple selections)
         $http({
-            url: 'http://adamandlindsey.co.uk:3000/test/example1/' + $scope.index,
+            url: 'http://localhost:4000/test/example1/' + $scope.index,
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }
         }).success(function (data, status, headers, config) {
@@ -101,10 +101,12 @@
 
     $scope.save = function ()
     {
+        jsonData = JSON.stringify($scope.leds, ["ledpage", "id", "rgb", "Name","selectedColour","Color1","Color2","Color3","Color4"]);
+
         $http({
-            url: 'http://adamandlindsey.co.uk:3000/test/example1/' + $scope.index,
+            url: 'http://localhost:4000/test/example1/' + $scope.index,
             method: 'PUT',
-            data: JSON.stringify($scope.leds, ["ledpage", "id", "rgb", "Name","selectedColour","Color1","Color2","Color3","Color4"]),
+            data: jsonData,
             headers: { 'Content-Type': 'application/json' }
         }).success(function (data, status, headers, config) {
             GetLedList();    
@@ -116,7 +118,7 @@
     $scope.delete = function()
     {    
         $http({
-            url: 'http://adamandlindsey.co.uk:3000/test/example1/' + $scope.index,
+            url: 'http://localhost:4000/test/example1/' + $scope.index,
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' }
         }).success(function (data, status, headers, config) {
@@ -132,7 +134,7 @@
     {
         $scope.leds = newPage;
         $http({
-            url: 'http://adamandlindsey.co.uk:3000/test/example1',
+            url: 'http://localhost:4000/test/example1',
             method: 'POST',
             data: JSON.stringify($scope.leds, ["ledpage", "id", "rgb", "Name", "selectedColour", "Color1", "Color2", "Color3", "Color4"]),
             headers: { 'Content-Type': 'application/json' }
