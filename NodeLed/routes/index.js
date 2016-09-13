@@ -12,12 +12,15 @@ router.get('/views/*', function (req, res) {
     res.render(req.params[0]);
 });
 
-router.get('/send/:key', function (req,res) {
-//    res.render(req.params[0]);
-    console.log("send to leds here");
-    ledfunc.writeToConsole(req.params.key);
-    res.end('send to leds here:' + req.params.key);
-  
+/* POST to leds */
+router.post('/send/board', function (req,res){
+    ledfunc.writeToBoard(req.body);
+    res.end();
+});
+
+router.post('/send/strip', function (req,res){
+    ledfunc.writeToStrip(req.body);
+    res.end();
 });
 
 module.exports = router;

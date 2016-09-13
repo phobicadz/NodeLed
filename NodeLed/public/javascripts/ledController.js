@@ -10,11 +10,13 @@
     $scope.selection = [];
     $scope.index = "";
     $scope.contentDialogHidden = true;
+    $scope.mongoURL = "http://adamandlindsey.co.uk:3000";
+    $scope.apiURL = "http://localhost:5000/send/data";
 
   
     function GetLedList() {
         $http({
-            url: 'http://localhost:4000/test/example1/?fields=["Name"]',
+            url: $scope.mongoURL + '/test/example1/?fields=["Name"]',
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }
         }).success(function (data, status, headers, config) {        
@@ -59,7 +61,7 @@
     {
        // get leds using selected id (first of mutliple selections)
         $http({
-            url: 'http://localhost:4000/test/example1/' + $scope.index,
+            url: $scope.mongoURL + '/test/example1/' + $scope.index,
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }
         }).success(function (data, status, headers, config) {
@@ -86,12 +88,12 @@
                 $scope.dataPacket += $scope.brightness + "," + color.toRgb().b + "," + color.toRgb().g + ","  + color.toRgb().r + ","
             }
         }
-        // TODO:Possibly send to MQTT instead triggering NodeMCU to retrive from URI itself and multiple times in the case of animation
+        // Send to the api on localhost - send as json
         $http({
-            url: 'http://192.168.0.18/api/leds',
+            url: $scope.apiURL,
             method: 'POST',
-            data: $scope.dataPacket.slice(0, -1),
-            headers: { 'Content-Type': 'text/plain' }
+            data:$scope.ledstring,
+            headers: { 'Content-Type': 'application/json' }
         }).success(function (data,status,headers,config) {
     
         }).error(function (data,status,headers,config) {
@@ -104,7 +106,7 @@
         jsonData = JSON.stringify($scope.leds, ["ledpage", "id", "rgb", "Name","selectedColour","Color1","Color2","Color3","Color4"]);
 
         $http({
-            url: 'http://localhost:4000/test/example1/' + $scope.index,
+            url: $scope.mongoURL + '/test/example1/' + $scope.index,
             method: 'PUT',
             data: jsonData,
             headers: { 'Content-Type': 'application/json' }
@@ -118,7 +120,7 @@
     $scope.delete = function()
     {    
         $http({
-            url: 'http://localhost:4000/test/example1/' + $scope.index,
+            url: $scope.mongoURL + '/test/example1/' + $scope.index,
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' }
         }).success(function (data, status, headers, config) {
@@ -134,7 +136,7 @@
     {
         $scope.leds = newPage;
         $http({
-            url: 'http://localhost:4000/test/example1',
+            url: $scope.mongoURL + '/test/example1',
             method: 'POST',
             data: JSON.stringify($scope.leds, ["ledpage", "id", "rgb", "Name", "selectedColour", "Color1", "Color2", "Color3", "Color4"]),
             headers: { 'Content-Type': 'application/json' }
