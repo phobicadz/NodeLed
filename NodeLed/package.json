@@ -28,7 +28,6 @@
     "serve-favicon": "~2.1.3",
     "stylus": "0.42.3",
     "tinycolor2": "^1.3.0",
-    "winjs": "^4.4.0",
-    "mongodb-rest":"~0.10.14"
+    "winjs": "^4.4.0"
   }
 }
