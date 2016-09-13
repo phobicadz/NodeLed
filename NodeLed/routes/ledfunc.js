@@ -1,6 +1,6 @@
 // led functions for Raspberry PI go here
 ledstrip = require('rpi-ws281x-native');
-ledgrid = require('hooloovoo');
+//ledgrid = require('hooloovoo');
 
 exports.writeToConsole =  function(message) {
     console.log(message);
