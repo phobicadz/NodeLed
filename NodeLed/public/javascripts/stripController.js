@@ -39,7 +39,7 @@ nodeledApp.controller('stripController', function ($scope,$http) {
 
     $scope.save = function ()
     {
-        jsonData = JSON.stringify($scope.leds, ["ledpage", "id", "rgb", "Name","selectedColour","Color1","Color2","Color3","Color4"]);
+        jsonData = JSON.stringify($scope.leds, ["ledpage", "id", "rgb", "Name","selectedColour","Color1","Color2","Color3","Color4"],"strip");
 
         $http({
             url: $scope.mongoURL + '/test/example1/' + $scope.index,
