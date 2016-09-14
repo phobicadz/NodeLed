@@ -16,11 +16,13 @@ router.get('/views/*', function (req, res) {
 router.post('/send/board', function (req,res){
     ledfunc.writeToBoard(req.body);
     res.end();
+    console.log('Write to board');
 });
 
 router.post('/send/strip', function (req,res){
     ledfunc.writeToStrip(req.body);
     res.end();
+    console.log('Write to strip');
 });
 
 module.exports = router;

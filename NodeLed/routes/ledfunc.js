@@ -1,6 +1,6 @@
 // led functions for Raspberry PI go here
 ledstrip = require('rpi-ws281x-native');
-//ledgrid = require('hooloovoo');
+ledgrid = require('hooloovoo');
 
 exports.writeToConsole =  function(message) {
     console.log(message);
@@ -8,8 +8,9 @@ exports.writeToConsole =  function(message) {
 
 // APA102 grid
 exports.writeToBoard = function(message) {
-    //   ledgrid.setup(120,16);
-    //   ledgrid.clear();
+    
+    ledgrid.clear();
+    ledgrid.setup(120,128);
     // convert JSON object to data buffer
     lednumber = 0;
 
@@ -19,9 +20,9 @@ exports.writeToBoard = function(message) {
              rgb = line[b].rgb.substr(4).replace(')','');
              arrRGB = rgb.split(",");
 
-             console.log(lednumber,arrRGB[0],arrRGB[1],arrRGB[2]);
+            // console.log(lednumber,arrRGB[0],arrRGB[1],arrRGB[2]);
 
-         //    ledgrid.set_pixel_RGB(lednumber,arrRGB[0],arrRGB[1],arrRGB[2])
+             ledgrid.set_pixel_RGB(lednumber,arrRGB[0],arrRGB[1],arrRGB[2])
              lednumber++;
         }     
     }
@@ -41,8 +42,8 @@ exports.writeToStrip = function(message) {
         RGB-format (0xff0000 is red).*/
     pixelData = new Uint32Array(100);
 
-    for(a=0;a<99;a++) {
-        pixelData[a] = rgb2Int(255,0,0);
+    for(a=0;a<100;a++) {
+        pixelData[a] = rgb2Int(0,0,255);
     }
 
     ledstrip.render(pixelData);
