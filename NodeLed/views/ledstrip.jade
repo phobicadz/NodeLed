@@ -1,2 +1,53 @@
-﻿div
-| Led strip page goes here
+﻿div(ng-controller="stripController")
+ div(class="container")
+    div(class="row")
+        div(class="col-sm-6")
+            win-content-dialog(primary-command-text="'Yes'" secondary-command-text="'Cancel'" title="'Warning'" hidden="contentDialogHidden" win-control="plopup")
+                span Are you sure you want to delete this page ?
+            div   
+                table
+                    tbody
+                        tr(ng-repeat='ledrow in leds.ledpage')
+                            td(ng-repeat='led in ledrow' ng-style='{ "background-color" : led.rgb}' ng-model='led.rgb' id='{{led.id}}' ng-click='tdclick(this)')               
+                br
+                br
+                table
+                    tr
+                        td
+                            color-picker(id="colorPicker5" color-picker-swatch-only="false" color-picker-format="'rgb'" color-picker-alpha="false" ng-model="leds.selectedColour.Color1" color-picker-on-change="onColorChange($event, color)" ng-click="selectColour(leds.selectedColour.Color1)")
+                        td
+                            color-picker(id="colorPicker6" color-picker-swatch-only="false" color-picker-format="'rgb'" color-picker-alpha="false" ng-model="leds.selectedColour.Color2" color-picker-on-change="onColorChange($event, color)" ng-click="selectColour(leds.selectedColour.Color2)")
+                        td
+                            color-picker(id="colorPicker7" color-picker-swatch-only="false" color-picker-format="'rgb'" color-picker-alpha="false" ng-model="leds.selectedColour.Color3" color-picker-on-change="onColorChange($event, color)" ng-click="selectColour(leds.selectedColour.Color3)")
+                        td
+                            color-picker(id="colorPicker8" color-picker-swatch-only="false" color-picker-format="'rgb'" color-picker-alpha="false" ng-model="leds.selectedColour.Color4" color-picker-on-change="onColorChange($event, color)" ng-click="selectColour(leds.selectedColour.Color4)")
+                br
+                label Saved Pages
+                win-list-view(id="myListView" class="win-listview win-selectionstylefilled" item-data-source="ledlist" selection="selection" items-reorderable="false" win-control="listView" tap-behavior="'directSelect'" selection-mode="'single'")     
+                    win-item-template
+                        div(class="miniTemp")
+                            span
+                                img(src="images/instagram.png" style="width:20px;height:20px")                         
+                                &nbsp;{{ item.data.Name }}
+                    win-list-layout
+                br               
+        div(class="col-sm-4")          
+            input(ng-click='suck()' type='button' value='Send' class="btn btn-default") 
+            &nbsp;
+            input(ng-click='add()' type='button' value='Add' class="btn btn-default") 
+            &nbsp;
+            input(ng-click='save()' type='button' value='Save' class="btn btn-default")
+            &nbsp;
+            input(ng-click='contentDialogHidden = false' type='button' value='Delete' class="btn btn-danger")
+            br
+            br          
+            label(for='ledpageName') Name
+            input(id="ledpageName" ng-model="leds.Name" class="form-control")
+            br
+            label(for='txtBrightness') Brightness 
+            input(type='input' ng-model='brightness' id='txtBrightness' class="form-control")
+            br
+            label(for='txtRaw') Raw Data
+            textarea(ng-model='dataPacket' rows='3' cols='40' style="width:100%" class="form-control" id="txtRaw" )
+            br
+          
