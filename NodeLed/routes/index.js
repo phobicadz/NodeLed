@@ -25,4 +25,10 @@ router.post('/send/strip', function (req,res){
     console.log('Write to strip');
 });
 
+router.post('/send/strip/:colour', function (req,res){
+    ledfunc.colourStrip(req.params.colour);
+    res.end();
+    console.log('Write colour to strip');
+});
+
 module.exports = router;
