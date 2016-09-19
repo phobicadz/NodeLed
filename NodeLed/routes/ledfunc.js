@@ -7,10 +7,9 @@ exports.writeToConsole =  function(message) {
 };
 
 // APA102 grid
-exports.writeToBoard = function(message) {
-    
+exports.writeToBoard = function(message) {  
+    ledgrid.setup(120);
     ledgrid.clear();
-    ledgrid.setup(120,128);
     // convert JSON object to data buffer
     lednumber = 0;
 
@@ -19,14 +18,11 @@ exports.writeToBoard = function(message) {
         for(b=0;b<12;b++) {
              rgb = line[b].rgb.substr(4).replace(')','');
              arrRGB = rgb.split(",");
-
-            // console.log(lednumber,arrRGB[0],arrRGB[1],arrRGB[2]);
-
+            //TODO: needs to write to take account of grid arrangement
              ledgrid.set_pixel_RGB(lednumber,arrRGB[0],arrRGB[1],arrRGB[2])
              lednumber++;
         }     
     }
-
 };
 
 // WS2812 strip
