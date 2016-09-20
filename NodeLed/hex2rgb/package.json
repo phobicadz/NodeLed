@@ -1,0 +1,105 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "hex2rgb@^2.2.0",
+        "scope": null,
+        "escapedName": "hex2rgb",
+        "name": "hex2rgb",
+        "rawSpec": "^2.2.0",
+        "spec": ">=2.2.0 <3.0.0",
+        "type": "range"
+      },
+      "c:\\Users\\adam.chamberlain\\Documents\\NodeLed\\node_modules\\hooloovoo"
+    ]
+  ],
+  "_from": "hex2rgb@>=2.2.0 <3.0.0",
+  "_id": "hex2rgb@2.2.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/hex2rgb",
+  "_nodeVersion": "0.12.0",
+  "_npmUser": {
+    "name": "glnster",
+    "email": "glenn@gcgrafix.com"
+  },
+  "_npmVersion": "2.7.6",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "hex2rgb@^2.2.0",
+    "scope": null,
+    "escapedName": "hex2rgb",
+    "name": "hex2rgb",
+    "rawSpec": "^2.2.0",
+    "spec": ">=2.2.0 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/hooloovoo"
+  ],
+  "_resolved": "https://registry.npmjs.org/hex2rgb/-/hex2rgb-2.2.0.tgz",
+  "_shasum": "dbae1d6bf9b22c7907d017a3e6b98608eba0b6fc",
+  "_shrinkwrap": null,
+  "_spec": "hex2rgb@^2.2.0",
+  "_where": "c:\\Users\\adam.chamberlain\\Documents\\NodeLed\\node_modules\\hooloovoo",
+  "author": {
+    "name": "Glenn Cueto",
+    "email": "glenncueto@gmail.com",
+    "url": "http://gcgrafix.com"
+  },
+  "bugs": {
+    "url": "https://github.com/glnster/hex2rgb/issues"
+  },
+  "dependencies": {},
+  "description": "Converts hex color to rgb and calculates appropriate corresponding foreground.",
+  "devDependencies": {
+    "chai": "^2.2.0",
+    "gulp": "^3.8.11",
+    "gulp-istanbul": "^0.8.1",
+    "gulp-mocha": "^2.0.1",
+    "istanbul": "^0.3.13",
+    "mocha": "^2.2.4"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "dist": {
+    "shasum": "dbae1d6bf9b22c7907d017a3e6b98608eba0b6fc",
+    "tarball": "https://registry.npmjs.org/hex2rgb/-/hex2rgb-2.2.0.tgz"
+  },
+  "gitHead": "57aa4f8ac8e9459e75cc6902bc376af9e0d594ff",
+  "homepage": "https://github.com/glnster/hex2rgb",
+  "keywords": [
+    "hex",
+    "rgb",
+    "yiq",
+    "convert",
+    "hex to rgb",
+    "contrast",
+    "foreground"
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/glnster/hex2rgb/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "index.js",
+  "maintainers": [
+    {
+      "name": "glnster",
+      "email": "glenn@gcgrafix.com"
+    }
+  ],
+  "name": "hex2rgb",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/glnster/hex2rgb.git"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "version": "2.2.0"
+}

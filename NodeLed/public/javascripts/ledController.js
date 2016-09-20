@@ -11,7 +11,7 @@
     $scope.index = "";
     $scope.contentDialogHidden = true;
     $scope.mongoURL = "http://adamandlindsey.co.uk:3000";
-    $scope.apiURL = "http://localhost:5000/send/board";
+    $scope.apiURL = "http://" + window.location.host + "/send/board";
 
   
     function GetLedList() {
