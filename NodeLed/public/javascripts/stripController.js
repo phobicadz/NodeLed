@@ -2,7 +2,9 @@ nodeledApp.controller('stripController', function ($scope,$http) {
     numRows = 1; numCols = 10; ledNumber = 0;
     newPage = { "ledpage": [], "Name": "NewPage", "selectedColour": { "Color1": "rgb(255,255,255)", "Color2": "rgb(255,255,255)", "Color3": "rgb(255,255,255)", "Color4": "rgb(255,255,255)" }, "strip":true };
     $scope.leds = newPage;
-
+    $scope.mongoURL = "http://adamandlindsey.co.uk:3000";
+    $scope.apiURL = "http://" + window.location.host + "/send/board";
+    
     function ClearPage() {
         $scope.leds.ledpage = [];
 
@@ -16,6 +18,18 @@ nodeledApp.controller('stripController', function ($scope,$http) {
             }
             $scope.leds.ledpage.push(data);
         }
+    }
+
+     function GetLedList() {
+        $http({
+            url: $scope.mongoURL + '/test/example1/?fields=["Name"]',
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+        }).success(function (data, status, headers, config) {        
+            $scope.ledlist = data;
+        }).error(function (data, status, headers, config) {
+            alert("failure to retrive pages")
+        });
     }
 
     ClearPage();
@@ -76,6 +90,8 @@ nodeledApp.controller('stripController', function ($scope,$http) {
             el.led.rgb = 'rgb(0,0,0)';
         }     
     }
+
+
 
     $scope.onColorChange = function ($event, color){
         $scope.currentColour = color;

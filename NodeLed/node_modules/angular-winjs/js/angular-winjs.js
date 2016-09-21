@@ -424,7 +424,7 @@
                 restrict: "E",
                 replace: true,
                 transclude: true,
-                template: "<div ng-transclude='true' class='" + helperClassName + "'></div>"
+                template: "<div ng-transclude class='" + helperClassName + "'></div>"
             };
         });
     }
@@ -464,7 +464,7 @@
             restrict: "E",
             replace: true,
             scope: getScopeForAPI(api),
-            template: "<DIV ng-transclude='true'></DIV>",
+            template: "<DIV ng-transclude></DIV>",
             transclude: true,
             link: function ($scope, elements, attrs) {
                 var control = initializeControl($scope, elements[0], WinJS.UI.AppBar, api);
@@ -503,7 +503,7 @@
             restrict: "E",
             replace: true,
             scope: getScopeForAPI(api),
-            template: "<BUTTON ng-transclude='true'></BUTTON>",
+            template: "<BUTTON ng-transclude></BUTTON>",
             transclude: true,
             link: function ($scope, elements) {
                 initializeControl($scope, elements[0], WinJS.UI.Command, api);
@@ -533,7 +533,7 @@
             restrict: "E",
             replace: true,
             scope: getScopeForAPI(api),
-            template: "<HR ng-transclude='true'></HR>",
+            template: "<HR ng-transclude></HR>",
             transclude: true,
             link: function ($scope, elements) {
                 initializeControl($scope, elements[0], WinJS.UI.Command, api, { type: "separator" });
@@ -563,7 +563,7 @@
             restrict: "E",
             replace: true,
             scope: getScopeForAPI(api),
-            template: "<DIV ng-transclude='true'></DIV>",
+            template: "<DIV ng-transclude></DIV>",
             transclude: true,
             link: function ($scope, elements) {
                 initializeControl($scope, elements[0], WinJS.UI.Command, api, { type: "content" });
@@ -652,7 +652,7 @@
             restrict: "E",
             replace: true,
             scope: getScopeForAPI(api),
-            template: "<DIV ng-transclude='true'></DIV>",
+            template: "<DIV ng-transclude></DIV>",
             transclude: true,
             link: function ($scope, elements, attrs) {
                 var control = initializeControl($scope, elements[0], WinJS.UI.ContentDialog, api);
@@ -714,7 +714,7 @@
             restrict: "E",
             replace: true,
             scope: getScopeForAPI(api),
-            template: "<DIV ng-transclude='true'></DIV>",
+            template: "<DIV ng-transclude></DIV>",
             transclude: true,
             controller: ['$scope', function ($scope) {
                 proxy($scope, this, "itemTemplate");
@@ -747,7 +747,7 @@
             restrict: "E",
             replace: true,
             scope: getScopeForAPI(api),
-            template: "<DIV ng-transclude='true'></DIV>",
+            template: "<DIV ng-transclude></DIV>",
             transclude: true,
             link: function ($scope, elements, attrs) {
                 var control = initializeControl($scope, elements[0], WinJS.UI.Flyout, api);
@@ -814,7 +814,7 @@
             restrict: "E",
             replace: true,
             scope: getScopeForAPI(api),
-            template: "<DIV><DIV class='placeholder-holder' style='visibility:hidden' ng-transclude='true'></DIV></DIV>",
+            template: "<DIV><DIV class='placeholder-holder' style='visibility:hidden' ng-transclude></DIV></DIV>",
             transclude: true,
             controller: ['$scope', function ($scope) {
                 // The children will (may) call back before the Hub is constructed so we queue up the calls to
@@ -879,7 +879,7 @@
             //       that the sections are in relative to static sections so we manage them in a .placeholder-holder
             //       element (see winHub directive above), the placeholder always lives in that thing. The content
             //       (meaning the real hub section) ends up being owned by the Hub.
-            template: "<DIV class='placeholder'><DIV ng-transclude='true'></DIV></DIV>",
+            template: "<DIV class='placeholder'><DIV ng-transclude></DIV></DIV>",
             transclude: true,
             link: function ($scope, elements, attrs, hub) {
                 var placeholder = elements[0];
@@ -907,7 +907,7 @@
             restrict: "E",
             replace: true,
             scope: getScopeForAPI(api),
-            template: "<DIV ng-transclude='true'></DIV>",
+            template: "<DIV ng-transclude></DIV>",
             transclude: true,
             link: function ($scope, elements) {
                 var control = initializeControl($scope, elements[0], WinJS.UI.ItemContainer, api);
@@ -1004,7 +1004,7 @@
             restrict: "E",
             replace: true,
             scope: getScopeForAPI(api),
-            template: "<DIV ng-transclude='true'></DIV>",
+            template: "<DIV ng-transclude></DIV>",
             transclude: true,
             controller: ['$scope', function ($scope) {
                 proxy($scope, this, "itemTemplate");
@@ -1052,7 +1052,7 @@
             restrict: "E",
             replace: true,
             scope: getScopeForAPI(api),
-            template: "<DIV ng-transclude='true'></DIV>",
+            template: "<DIV ng-transclude></DIV>",
             transclude: true,
             link: function ($scope, elements, attrs) {
                 var control = initializeControl($scope, elements[0], WinJS.UI.Menu, api);
@@ -1120,7 +1120,7 @@
             restrict: "E",
             replace: true,
             scope: getScopeForAPI(api),
-            template: "<DIV><DIV class='placeholder-holder' style='visibility:hidden' ng-transclude='true'></DIV></DIV>",
+            template: "<DIV><DIV class='placeholder-holder' style='visibility:hidden' ng-transclude></DIV></DIV>",
             transclude: true,
             controller: ['$scope', function ($scope) {
                 // The children will (may) call back before the Pivot is constructed so we queue up the calls to
@@ -1183,7 +1183,7 @@
             //       that the sections are in relative to static sections so we manage them in a .placeholder-holder
             //       element (see winPivot directive above), the placeholder always lives in that thing. The content
             //       (meaning the real pivot section) ends up being owned by the Hub.
-            template: "<DIV class='placeholder'><DIV ng-transclude='true'></DIV></DIV>",
+            template: "<DIV class='placeholder'><DIV ng-transclude></DIV></DIV>",
             transclude: true,
             link: function ($scope, elements, attrs, pivot) {
                 var placeholder = elements[0],
@@ -1264,7 +1264,7 @@
             restrict: "E",
             replace: true,
             scope: getScopeForAPI(api),
-            template: "<DIV ng-transclude='true'></DIV>",
+            template: "<DIV ng-transclude></DIV>",
             transclude: true,
             link: function ($scope, elements) {
                 initializeControl($scope, elements[0], WinJS.UI.SemanticZoom, api);
@@ -1288,7 +1288,7 @@
             restrict: "E",
             replace: true,
             scope: getScopeForAPI(api),
-            template: "<DIV ng-transclude='true'></DIV>",
+            template: "<DIV ng-transclude></DIV>",
             transclude: true,
             link: function ($scope, elements, attrs) {
                 var element = elements[0],
@@ -1336,7 +1336,7 @@
             restrict: "E",
             replace: true,
             transclude: true,
-            template: "<div ng-transclude='true' class='win-split-view-pane'></div>"
+            template: "<div ng-transclude class='win-split-view-pane'></div>"
         };
     });
 
@@ -1346,7 +1346,7 @@
             restrict: "E",
             replace: true,
             transclude: true,
-            template: "<div ng-transclude='true' class='win-split-view-content'></div>"
+            template: "<div ng-transclude class='win-split-view-content'></div>"
         };
     });
 
@@ -1359,7 +1359,7 @@
             restrict: "E",
             replace: true,
             scope: getScopeForAPI(api),
-            template: "<button ng-transclude='true'></button>",
+            template: "<button ng-transclude></button>",
             transclude: true,
             link: function ($scope, elements) {
                 initializeControl($scope, elements[0], WinJS.UI.SplitViewPaneToggle, api);
@@ -1378,7 +1378,7 @@
             restrict: "E",
             replace: true,
             scope: getScopeForAPI(api),
-            template: "<DIV ng-transclude='true'></DIV>",
+            template: "<DIV ng-transclude></DIV>",
             transclude: true,
             link: function ($scope, elements) {
                 initializeControl($scope, elements[0], WinJS.UI.SplitViewCommand, api);
@@ -1454,7 +1454,7 @@
             restrict: "E",
             replace: true,
             scope: getScopeForAPI(api),
-            template: "<DIV ng-transclude='true'></DIV>",
+            template: "<DIV ng-transclude></DIV>",
             transclude: true,
             link: function ($scope, elements, attrs) {
                 var control = initializeControl($scope, elements[0], WinJS.UI.ToolBar, api);
@@ -1493,7 +1493,7 @@
             restrict: "E",
             replace: true,
             scope: getScopeForAPI(api),
-            template: "<BUTTON ng-transclude='true'></BUTTON>",
+            template: "<BUTTON ng-transclude></BUTTON>",
             transclude: true,
             link: function ($scope, elements) {
                 initializeControl($scope, elements[0], WinJS.UI.Command, api);
@@ -1523,7 +1523,7 @@
             restrict: "E",
             replace: true,
             scope: getScopeForAPI(api),
-            template: "<HR ng-transclude='true'></HR>",
+            template: "<HR ng-transclude></HR>",
             transclude: true,
             link: function ($scope, elements) {
                 initializeControl($scope, elements[0], WinJS.UI.Command, api, { type: "separator" });
@@ -1553,7 +1553,7 @@
             restrict: "E",
             replace: true,
             scope: getScopeForAPI(api),
-            template: "<DIV ng-transclude='true'></DIV>",
+            template: "<DIV ng-transclude></DIV>",
             transclude: true,
             link: function ($scope, elements) {
                 initializeControl($scope, elements[0], WinJS.UI.Command, api, { type: "content" });
@@ -1577,7 +1577,7 @@
             restrict: "E",
             replace: true,
             scope: getScopeForAPI(api),
-            template: "<DIV ng-transclude='true'></DIV>",
+            template: "<DIV ng-transclude></DIV>",
             transclude: true,
             controller: ['$scope', function ($scope) {
                 proxy($scope, this, "contentElement");
@@ -1599,7 +1599,7 @@
             transclude: true,
             template: "\
 <div style='visibility:hidden'>\
-  <div ng-transclude='true'></div>\
+  <div ng-transclude></div>\
 </div>",
             link: function ($scope, elements, attrs, tooltip) {
                 tooltip.contentElement = elements[0].firstElementChild;
