@@ -28,16 +28,16 @@
                         div(class="miniTemp")
                             span
                                 img(src="images/instagram.png" style="width:20px;height:20px")                         
-                                &nbsp;{{ item.data.Name }}
+                                | &nbsp;{{ item.data.Name }}
                     win-list-layout
                 br               
         div(class="col-sm-4")          
             input(ng-click='suck()' type='button' value='Send' class="btn btn-default") 
-            &nbsp;
+            | &nbsp;
             input(ng-click='add()' type='button' value='Add' class="btn btn-default") 
-            &nbsp;
+            | &nbsp;
             input(ng-click='save()' type='button' value='Save' class="btn btn-default")
-            &nbsp;
+            | &nbsp;
             input(ng-click='contentDialogHidden = false' type='button' value='Delete' class="btn btn-danger")
             br
             br          
