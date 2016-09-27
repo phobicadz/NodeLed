@@ -13,6 +13,8 @@
     $scope.mongoURL = "http://adamandlindsey.co.uk:3000";
     $scope.apiURL = "http://" + window.location.host + "/send/board";
 
+     // Example query for future reference
+     //http://adamandlindsey.co.uk:3000/test/example1/?query={%22selectedColour.Color1%22:%22rgb(248,%20229,%2013)%22}&fields=[%22Name%22,%22selectedColour.Color1%22]
   
     function GetLedList() {
         $http({
