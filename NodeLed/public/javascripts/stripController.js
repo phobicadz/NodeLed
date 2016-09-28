@@ -22,7 +22,7 @@ nodeledApp.controller('stripController', function ($scope,$http) {
 
      function GetLedList() {
         $http({
-            url: $scope.mongoURL + '/test/example1/?fields=["Name"]&query={"grid": { "$exists":true}, "grid":true }',
+            url: $scope.mongoURL + 'test/example1/?fields=["grid","Name"]&sort=["Name"]&query={ "$and": [ { "grid": { "$exists":true} }, {"grid":true} ] }',
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }
         }).success(function (data, status, headers, config) {        
