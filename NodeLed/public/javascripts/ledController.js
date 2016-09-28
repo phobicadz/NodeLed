@@ -18,7 +18,7 @@
   
     function GetLedList() {
         $http({
-            url: $scope.mongoURL + '/test/example1/?fields=["Name"]',
+            url: $scope.mongoURL + 'test/example1/?fields=["grid","Name"]&sort=["Name"]&query={"$or":[{ "grid":{"$exists":false}}, {"grid":false}]}',
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }
         }).success(function (data, status, headers, config) {        
