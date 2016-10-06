@@ -1,6 +1,17 @@
 ﻿var express = require('express');
 var router = express.Router();
+var mqtt = require('mqtt');
 var ledfunc = require('../routes/ledfunc');
+
+var client = mqtt.connect('mqtt://adamandlindsey.co.uk');
+
+client.on('connect', function () {
+  console.log('connected')
+})
+
+client.on('error', function () {
+  console.log('Could not connect');
+})
 
 /* GET home page. */
 router.get('/', function (req, res) {
@@ -25,10 +36,10 @@ router.post('/send/strip', function (req,res){
     console.log('Write to strip');
 });
 
-router.post('/send/strip/:colour', function (req,res){
-    ledfunc.colourStrip(req.params.colour);
+router.post('/send/strip/rainbow', function (req,res){
+    ledfunc.rainbowStrip();
     res.end();
-    console.log('Write colour to strip');
+    console.log('Write to strip with a rainbow');
 });
 
 module.exports = router;

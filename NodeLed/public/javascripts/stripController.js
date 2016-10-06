@@ -1,7 +1,15 @@
 nodeledApp.controller('stripController', function ($scope,$http) {
-    numRows = 1; numCols = 10; ledNumber = 0;
+    numRows = 10; numCols = 10; ledNumber = 0;
     newPage = { "ledpage": [], "Name": "NewPage", "selectedColour": { "Color1": "rgb(255,255,255)", "Color2": "rgb(255,255,255)", "Color3": "rgb(255,255,255)", "Color4": "rgb(255,255,255)" }, "strip":true };
     $scope.leds = newPage;
+    $scope.currentColour = "";
+    $scope.brightness = 31;
+    $scope.dataPacket = "";
+    $scope.ledstring = "";
+    $scope.ledlist = [];
+    $scope.selection = [];
+    $scope.index = "";
+    $scope.contentDialogHidden = true;
     $scope.mongoURL = "http://adamandlindsey.co.uk:3000";
     $scope.apiURL = "http://" + window.location.host + "/send/board";
     
@@ -22,7 +30,7 @@ nodeledApp.controller('stripController', function ($scope,$http) {
 
      function GetLedList() {
         $http({
-            url: $scope.mongoURL + 'test/example1/?fields=["grid","Name"]&sort=["Name"]&query={ "$and": [ { "grid": { "$exists":true} }, {"grid":true} ] }',
+            url: $scope.mongoURL + '/test/example1/?fields=["grid","Name"]&sort=["Name"]&query={ "$and": [ { "grid": { "$exists":true} }, {"grid":true} ] }',
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }
         }).success(function (data, status, headers, config) {        
@@ -91,8 +99,6 @@ nodeledApp.controller('stripController', function ($scope,$http) {
         }     
     }
 
-
-
     $scope.onColorChange = function ($event, color){
         $scope.currentColour = color;
     }
@@ -106,4 +112,34 @@ nodeledApp.controller('stripController', function ($scope,$http) {
         selectLeds();
     };
 
+        $scope.dialogHandler = function (eventInfo) {
+        //    alert(eventInfo.detail.result);
+        if (eventInfo.detail.result == "primary") {
+            $scope.delete();
+        }  
+    };
+
+    $scope.$on('$routeChangeSuccess', function () {
+        $scope.listView.oniteminvoked = handler;
+        $scope.plopup.onafterhide = $scope.dialogHandler;
+    });
+
 });
+
+// Please note that $uibModalInstance represents a modal window (instance) dependency.
+// It is not the same as the $uibModal service used above.
+nodeledApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items) {
+    $scope.items = items;
+    $scope.selected = {
+        item: $scope.items[0]
+    };
+
+    $scope.ok = function () {
+        $uibModalInstance.close($scope.selected.item);
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});
+
