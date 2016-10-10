@@ -12,7 +12,7 @@ nodeledApp.controller('stripController', function ($scope,$http) {
     $scope.index = "";
     $scope.contentDialogHidden = true;
     $scope.mongoURL = "http://adamandlindsey.co.uk:3000";
-    $scope.apiURL = "http://" + window.location.host + "/send/board";
+    $scope.apiURL = "http://" + window.location.host + "/send/strip";
     
     function ClearPage() {
         $scope.leds.ledpage = [];
@@ -59,6 +59,25 @@ nodeledApp.controller('stripController', function ($scope,$http) {
         });
     }
     $scope.selectLeds = selectLeds;
+
+    $scope.sendToStrip = function() {
+        // send to strip
+        $scope.ledstring = JSON.stringify($scope.leds,["ledpage","id","rgb","strip","repeat","interval","animate","loop"]);
+
+        // Send to the api on localhost - send as json
+        $http({
+            url: $scope.apiURL,
+            method: 'POST',
+            data:$scope.ledstring,
+            headers: { 'Content-Type': 'application/json' }
+        }).success(function (data,status,headers,config) {
+    
+        }).error(function (data,status,headers,config) {
+           
+        });
+
+        $scope.save();
+    }
 
     $scope.save = function ()
     {

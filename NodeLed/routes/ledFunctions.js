@@ -90,6 +90,17 @@ exports.writeToStrip = function(message) {
     ledstrip.render(pixelData);
 };
 
+// write pages as a sequence, individually animating them if require
+exports.writeSequenceToStrip = function(message) {
+
+    // expected parameters:-
+    // array of page ids
+    // interval between them
+    // wether to loop the whole sequence or not
+    
+}
+
+
 function renderOnInterval(message) {
 
      if(repeatLine == 10) {

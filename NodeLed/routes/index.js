@@ -24,19 +24,25 @@ router.get('/views/*', function (req, res) {
 });
 
 /* POST to leds */
-router.post('/send/board', function (req,res){
+router.post('/send/board', function (req,res) {
     ledFunctions.writeToBoard(req.body);
     res.end();
     console.log('Write to board');
 });
 
-router.post('/send/strip', function (req,res){
+router.post('/send/strip', function (req,res) {
     ledFunctions.writeToStrip(req.body);
     res.end();
     console.log('Write to strip');
 });
 
-router.post('/send/strip/rainbow', function (req,res){
+router.post('/send/strip/sequence', function (req,res) { 
+    ledFunctions.writeSequenceToStrip(req.body);
+    res.end();
+    console.log('Write sequence to strip');
+})
+
+router.post('/send/strip/rainbow', function (req,res) {
     ledFunctions.rainbowStrip();
     res.end();
     console.log('Write to strip with a rainbow');
