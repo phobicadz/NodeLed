@@ -6,6 +6,7 @@ ledgrid = require('hooloovoo');
 
 var intervalCallback;
 var repeatLine = 0;
+var loop = false;
 
 exports.writeToConsole =  function(message) {
     console.log(message);
@@ -47,6 +48,11 @@ exports.rainbowStrip = function(message) {
   }
 };
 
+// stop loop
+exports.stopLoop = function() {
+    clearTimeout(intervalCallback);
+}
+
 // write pixel data, message contains JSON data
 exports.writeToStrip = function(message) {
     // check to see if this is a repeating pattern
@@ -84,8 +90,11 @@ exports.writeToStrip = function(message) {
 function renderOnInterval(message) {
 
      if(repeatLine == 10) {
-         clearTimeout(intervalCallback);
-         repeatLine = 0;
+            clearTimeout(intervalCallback);
+            repeatLine = 0;
+            if(loop) {  
+                intervalCallback = setInterval(renderOnInterval,message.interval,message);
+            } 
      }
      else
      {

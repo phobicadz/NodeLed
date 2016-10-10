@@ -1,7 +1,7 @@
 ﻿var express = require('express');
 var router = express.Router();
 var mqtt = require('mqtt');
-var ledfunc = require('../routes/ledFunctions');
+var ledFunctions = require('../routes/ledFunctions');
 
 var client = mqtt.connect('mqtt://adamandlindsey.co.uk');
 
@@ -25,19 +25,19 @@ router.get('/views/*', function (req, res) {
 
 /* POST to leds */
 router.post('/send/board', function (req,res){
-    ledfunc.writeToBoard(req.body);
+    ledFunctions.writeToBoard(req.body);
     res.end();
     console.log('Write to board');
 });
 
 router.post('/send/strip', function (req,res){
-    ledfunc.writeToStrip(req.body);
+    ledFunctions.writeToStrip(req.body);
     res.end();
     console.log('Write to strip');
 });
 
 router.post('/send/strip/rainbow', function (req,res){
-    ledfunc.rainbowStrip();
+    ledFunctions.rainbowStrip();
     res.end();
     console.log('Write to strip with a rainbow');
 });

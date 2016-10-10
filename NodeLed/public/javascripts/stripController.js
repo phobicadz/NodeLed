@@ -1,6 +1,7 @@
 nodeledApp.controller('stripController', function ($scope,$http) {
     numRows = 10; numCols = 10; ledNumber = 0;
-    newPage = { "ledpage": [], "Name": "NewPage", "selectedColour": { "Color1": "rgb(255,255,255)", "Color2": "rgb(255,255,255)", "Color3": "rgb(255,255,255)", "Color4": "rgb(255,255,255)" }, "strip":true,"repeat":false,"interval":5000 };
+    newPage = { "ledpage": [], "Name": "NewPage", "selectedColour": { "Color1": "rgb(255,255,255)", "Color2": "rgb(255,255,255)", "Color3": "rgb(255,255,255)", "Color4": "rgb(255,255,255)" },
+         "strip":true,"repeat":false,"interval":5000,"animate":false,"loop":false};
     $scope.leds = newPage;
     $scope.currentColour = "";
     $scope.brightness = 31;
@@ -61,7 +62,7 @@ nodeledApp.controller('stripController', function ($scope,$http) {
 
     $scope.save = function ()
     {
-        jsonData = JSON.stringify($scope.leds, ["ledpage", "id", "rgb", "Name","selectedColour","Color1","Color2","Color3","Color4","strip","repeat"]);
+        jsonData = JSON.stringify($scope.leds, ["ledpage", "id", "rgb", "Name","selectedColour","Color1","Color2","Color3","Color4","strip","repeat","interval","animate","loop"]);
 
         $http({
             url: $scope.mongoURL + '/test/example1/' + $scope.index,
