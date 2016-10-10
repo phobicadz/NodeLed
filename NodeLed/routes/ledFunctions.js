@@ -51,6 +51,7 @@ exports.rainbowStrip = function(message) {
 // stop loop
 exports.stopLoop = function() {
     clearTimeout(intervalCallback);
+    loop = false;
 }
 
 // write pixel data, message contains JSON data
@@ -67,12 +68,14 @@ exports.writeToStrip = function(message) {
     pixelData = new Uint32Array(100);
   
     // check message for repeat parameter
-    if (message.repeat)
+    if (message.animate)
     {
+        loop = message.loop;
         intervalCallback = setInterval(renderOnInterval,message.interval,message);
     }
     else
     {
+        // check repeat to see if first ten pixels are to be repeated
         for(a=0;a<10;a++) {
             line = message.ledpage[a];
             for(b=0;b<10;b++) {
