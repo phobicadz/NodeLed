@@ -2,6 +2,10 @@
 ledstrip = require('rpi-ws281x-native');
 ledgrid = require('hooloovoo');
 // look at using spi as hooloovoo seems shit/or alter hooloovoo to make it less shit
+// seems to refresh on every pixel
+
+var intervalCallback;
+var repeatLine = 0;
 
 exports.writeToConsole =  function(message) {
     console.log(message);
@@ -37,7 +41,7 @@ exports.rainbowStrip = function(message) {
              pixelData[i] = colorwheel((offset + i) % 256);
         }
 
-     offset = (offset + 1) % 256;
+    offset = (offset + 1) % 256;
 
     ledstrip.render(pixelData);
   }
@@ -45,24 +49,64 @@ exports.rainbowStrip = function(message) {
 
 // write pixel data, message contains JSON data
 exports.writeToStrip = function(message) {
+    // check to see if this is a repeating pattern
+    // if so then write pixel data as a pattern loop ie each ten pixels repeated ten times over strip
+    // in given period of time
+
+    // clear any previous repeating pattern
+    if (intervalCallback != null) clearTimeout(intervalCallback);
 
     ledstrip.init(100);
     lednumber = 0;
-
     pixelData = new Uint32Array(100);
-
-    for(a=0;a<10;a++) {
-        line = message.ledpage[a];
-        for(b=0;b<10;b++) {
-             rgb = line[b].rgb.substr(4).replace(')','');
-             arrRGB = rgb.split(",");
-             pixelData[lednumber] = rgb2Int(arrRGB[0],arrRGB[1],arrRGB[2])
-             lednumber++;
-        }     
+  
+    // check message for repeat parameter
+    if (message.repeat)
+    {
+        intervalCallback = setInterval(renderOnInterval,message.interval,message);
     }
+    else
+    {
+        for(a=0;a<10;a++) {
+            line = message.ledpage[a];
+            for(b=0;b<10;b++) {
+                rgb = line[b].rgb.substr(4).replace(')','');
+                arrRGB = rgb.split(",");
+                pixelData[lednumber] = rgb2Int(arrRGB[0],arrRGB[1],arrRGB[2])
+                lednumber++;
+            }     
+        }
+    }
+
     ledstrip.render(pixelData);
 };
 
+function renderOnInterval(message) {
+
+     if(repeatLine == 10) {
+         clearTimeout(intervalCallback);
+         repeatLine = 0;
+     }
+     else
+     {
+        ledstrip.init(100);
+        lednumber = 0;
+        pixelData = new Uint32Array(100);
+        line = message.ledpage[repeatLine];
+
+        for(a=0;a<10;a++) {
+                for(b=0;b<10;b++) {
+                    rgb = line[b].rgb.substr(4).replace(')','');
+                    arrRGB = rgb.split(",");
+                    pixelData[lednumber] = rgb2Int(arrRGB[0],arrRGB[1],arrRGB[2])
+                    lednumber++;
+                }     
+            }
+
+        ledstrip.render(pixelData);
+        repeatLine ++;
+     }     
+}
 
 
 function rgb2Int(r, g, b) {

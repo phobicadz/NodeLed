@@ -1,7 +1,7 @@
 ﻿var express = require('express');
 var router = express.Router();
 var mqtt = require('mqtt');
-var ledfunc = require('../routes/ledfunc');
+var ledfunc = require('../routes/ledFunctions');
 
 var client = mqtt.connect('mqtt://adamandlindsey.co.uk');
 
