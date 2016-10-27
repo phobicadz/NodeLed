@@ -87,7 +87,7 @@
             }        
             for (b = 0; b < numCols; b++) {
                 var color = tinycolor(ledrow[b].rgb);
-                $scope.dataPacket += $scope.brightness + "," + color.toRgb().b + "," + color.toRgb().g + ","  + color.toRgb().r + ","
+                $scope.dataPacket += $scope.brightness + "," + color.toRgb().r + "," + color.toRgb().g + ","  + color.toRgb().b + ","
             }
         }
         // Send to the api on localhost - send as json

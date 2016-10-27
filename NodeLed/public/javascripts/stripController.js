@@ -1,11 +1,8 @@
 nodeledApp.controller('stripController', function ($scope,$http) {
     numRows = 10; numCols = 10; ledNumber = 0;
-<<<<<<< HEAD
-    newPage = { "ledpage": [], "Name": "NewPage", "selectedColour": { "Color1": "rgb(255,255,255)", "Color2": "rgb(255,255,255)", "Color3": "rgb(255,255,255)", "Color4": "rgb(255,255,255)" }, "strip":true };
-=======
     newPage = { "ledpage": [], "Name": "NewPage", "selectedColour": { "Color1": "rgb(255,255,255)", "Color2": "rgb(255,255,255)", "Color3": "rgb(255,255,255)", "Color4": "rgb(255,255,255)" },
          "strip":true,"repeat":false,"interval":5000,"animate":false,"loop":false};
->>>>>>> 445533331b793f8d37e7c0371b4450bf13fa20b8
+
     $scope.leds = newPage;
     $scope.currentColour = "";
     $scope.brightness = 31;
@@ -39,16 +36,7 @@ nodeledApp.controller('stripController', function ($scope,$http) {
         $scope.dataPacket = "";
         $scope.ledstring = JSON.stringify($scope.leds,["ledpage","id","rgb"]);
         // build string of data to send from array
-        for (a = 0; a < numRows; a++) {
-            var ledrow = Object.assign([], $scope.leds.ledpage[a]);
-            if (isOdd(a)) {         
-                ledrow.sort(predicateBy("id"));
-            }        
-            for (b = 0; b < numCols; b++) {
-                var color = tinycolor(ledrow[b].rgb);
-                $scope.dataPacket += $scope.brightness + "," + color.toRgb().b + "," + color.toRgb().g + ","  + color.toRgb().r + ","
-            }
-        }
+      
         // Send to the api on localhost - send as json
         $http({
             url: $scope.apiURL,

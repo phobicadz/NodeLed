@@ -81,7 +81,7 @@ exports.writeToStrip = function(message) {
             for(b=0;b<10;b++) {
                 rgb = line[b].rgb.substr(4).replace(')','');
                 arrRGB = rgb.split(",");
-                pixelData[lednumber] = rgb2Int(arrRGB[0],arrRGB[1],arrRGB[2])
+                pixelData[lednumber] = rgb2Int(arrRGB[1],arrRGB[0],arrRGB[2])
                 lednumber++;
             }     
         }

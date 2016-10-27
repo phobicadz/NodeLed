@@ -32,9 +32,8 @@ router.post('/send/board', function (req,res) {
 
 router.post('/send/strip', function (req,res) {
     ledFunctions.writeToStrip(req.body);
-    res.end();
     console.log('Write to strip');
-    
+    res.end(); 
 });
 
 router.post('/send/strip/sequence', function (req,res) { 
