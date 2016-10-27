@@ -1,6 +1,11 @@
 nodeledApp.controller('stripController', function ($scope,$http) {
     numRows = 10; numCols = 10; ledNumber = 0;
+<<<<<<< HEAD
     newPage = { "ledpage": [], "Name": "NewPage", "selectedColour": { "Color1": "rgb(255,255,255)", "Color2": "rgb(255,255,255)", "Color3": "rgb(255,255,255)", "Color4": "rgb(255,255,255)" }, "strip":true };
+=======
+    newPage = { "ledpage": [], "Name": "NewPage", "selectedColour": { "Color1": "rgb(255,255,255)", "Color2": "rgb(255,255,255)", "Color3": "rgb(255,255,255)", "Color4": "rgb(255,255,255)" },
+         "strip":true,"repeat":false,"interval":5000,"animate":false,"loop":false};
+>>>>>>> 445533331b793f8d37e7c0371b4450bf13fa20b8
     $scope.leds = newPage;
     $scope.currentColour = "";
     $scope.brightness = 31;
@@ -11,7 +16,7 @@ nodeledApp.controller('stripController', function ($scope,$http) {
     $scope.index = "";
     $scope.contentDialogHidden = true;
     $scope.mongoURL = "http://adamandlindsey.co.uk:3000";
-    $scope.apiURL = "http://" + window.location.host + "/send/board";
+    $scope.apiURL = "http://" + window.location.host + "/send/strip";
     
     function ClearPage() {
         $scope.leds.ledpage = [];
@@ -60,7 +65,7 @@ nodeledApp.controller('stripController', function ($scope,$http) {
 
      function GetLedList() {
         $http({
-            url: $scope.mongoURL + '/test/example1/?fields=["Name"]&query={"grid": { "$exists":true}, "grid":true }',
+            url: $scope.mongoURL + '/test/example1/?fields=["grid","Name"]&sort=["Name"]&query={ "$and": [ { "grid": { "$exists":true} }, {"grid":true} ] }',
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }
         }).success(function (data, status, headers, config) {        
@@ -89,9 +94,28 @@ nodeledApp.controller('stripController', function ($scope,$http) {
     }
     $scope.selectLeds = selectLeds;
 
+    $scope.sendToStrip = function() {
+        // send to strip
+        $scope.ledstring = JSON.stringify($scope.leds,["ledpage","id","rgb","strip","repeat","interval","animate","loop"]);
+
+        // Send to the api on localhost - send as json
+        $http({
+            url: $scope.apiURL,
+            method: 'POST',
+            data:$scope.ledstring,
+            headers: { 'Content-Type': 'application/json' }
+        }).success(function (data,status,headers,config) {
+    
+        }).error(function (data,status,headers,config) {
+           
+        });
+
+        $scope.save();
+    }
+
     $scope.save = function ()
     {
-        jsonData = JSON.stringify($scope.leds, ["ledpage", "id", "rgb", "Name","selectedColour","Color1","Color2","Color3","Color4"],"strip");
+        jsonData = JSON.stringify($scope.leds, ["ledpage", "id", "rgb", "Name","selectedColour","Color1","Color2","Color3","Color4","strip","repeat","interval","animate","loop"]);
 
         $http({
             url: $scope.mongoURL + '/test/example1/' + $scope.index,
@@ -129,8 +153,6 @@ nodeledApp.controller('stripController', function ($scope,$http) {
         }     
     }
 
-
-
     $scope.onColorChange = function ($event, color){
         $scope.currentColour = color;
     }
@@ -144,4 +166,34 @@ nodeledApp.controller('stripController', function ($scope,$http) {
         selectLeds();
     };
 
+        $scope.dialogHandler = function (eventInfo) {
+        //    alert(eventInfo.detail.result);
+        if (eventInfo.detail.result == "primary") {
+            $scope.delete();
+        }  
+    };
+
+    $scope.$on('$routeChangeSuccess', function () {
+        $scope.listView.oniteminvoked = handler;
+        $scope.plopup.onafterhide = $scope.dialogHandler;
+    });
+
 });
+
+// Please note that $uibModalInstance represents a modal window (instance) dependency.
+// It is not the same as the $uibModal service used above.
+nodeledApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items) {
+    $scope.items = items;
+    $scope.selected = {
+        item: $scope.items[0]
+    };
+
+    $scope.ok = function () {
+        $uibModalInstance.close($scope.selected.item);
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});
+

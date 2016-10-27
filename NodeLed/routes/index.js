@@ -1,6 +1,17 @@
 ﻿var express = require('express');
 var router = express.Router();
-var ledfunc = require('../routes/ledfunc');
+var mqtt = require('mqtt');
+var ledFunctions = require('../routes/ledFunctions');
+
+var client = mqtt.connect('mqtt://adamandlindsey.co.uk');
+
+client.on('connect', function () {
+  console.log('connected')
+})
+
+client.on('error', function () {
+  console.log('Could not connect');
+})
 
 /* GET home page. */
 router.get('/', function (req, res) {
@@ -13,23 +24,29 @@ router.get('/views/*', function (req, res) {
 });
 
 /* POST to leds */
-router.post('/send/board', function (req,res){
-    ledfunc.writeToBoard(req.body);
+router.post('/send/board', function (req,res) {
+    ledFunctions.writeToBoard(req.body);
     res.end();
     console.log('Write to board');
 });
 
-router.post('/send/strip', function (req,res){
-    ledfunc.writeToStrip(req.body);
+router.post('/send/strip', function (req,res) {
+    ledFunctions.writeToStrip(req.body);
     res.end();
     console.log('Write to strip');
     
 });
 
-router.post('/send/strip/:colour', function (req,res){
-    ledfunc.colourStrip(req.params.colour);
+router.post('/send/strip/sequence', function (req,res) { 
+    ledFunctions.writeSequenceToStrip(req.body);
     res.end();
-    console.log('Write colour to strip');
+    console.log('Write sequence to strip');
+})
+
+router.post('/send/strip/rainbow', function (req,res) {
+    ledFunctions.rainbowStrip();
+    res.end();
+    console.log('Write to strip with a rainbow');
 });
 
 module.exports = router;
