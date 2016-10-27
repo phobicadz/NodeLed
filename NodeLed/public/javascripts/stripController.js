@@ -1,7 +1,15 @@
 nodeledApp.controller('stripController', function ($scope,$http) {
-    numRows = 1; numCols = 10; ledNumber = 0;
+    numRows = 10; numCols = 10; ledNumber = 0;
     newPage = { "ledpage": [], "Name": "NewPage", "selectedColour": { "Color1": "rgb(255,255,255)", "Color2": "rgb(255,255,255)", "Color3": "rgb(255,255,255)", "Color4": "rgb(255,255,255)" }, "strip":true };
     $scope.leds = newPage;
+    $scope.currentColour = "";
+    $scope.brightness = 31;
+    $scope.dataPacket = "";
+    $scope.ledstring = "";
+    $scope.ledlist = [];
+    $scope.selection = [];
+    $scope.index = "";
+    $scope.contentDialogHidden = true;
     $scope.mongoURL = "http://adamandlindsey.co.uk:3000";
     $scope.apiURL = "http://" + window.location.host + "/send/board";
     
@@ -19,6 +27,36 @@ nodeledApp.controller('stripController', function ($scope,$http) {
             $scope.leds.ledpage.push(data);
         }
     }
+
+    $scope.suck = function()
+    {
+        // send and save
+        $scope.dataPacket = "";
+        $scope.ledstring = JSON.stringify($scope.leds,["ledpage","id","rgb"]);
+        // build string of data to send from array
+        for (a = 0; a < numRows; a++) {
+            var ledrow = Object.assign([], $scope.leds.ledpage[a]);
+            if (isOdd(a)) {         
+                ledrow.sort(predicateBy("id"));
+            }        
+            for (b = 0; b < numCols; b++) {
+                var color = tinycolor(ledrow[b].rgb);
+                $scope.dataPacket += $scope.brightness + "," + color.toRgb().b + "," + color.toRgb().g + ","  + color.toRgb().r + ","
+            }
+        }
+        // Send to the api on localhost - send as json
+        $http({
+            url: $scope.apiURL,
+            method: 'POST',
+            data:$scope.ledstring,
+            headers: { 'Content-Type': 'application/json' }
+        }).success(function (data,status,headers,config) {
+    
+        }).error(function (data,status,headers,config) {
+           
+        });
+    }
+
 
      function GetLedList() {
         $http({

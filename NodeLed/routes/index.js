@@ -23,6 +23,7 @@ router.post('/send/strip', function (req,res){
     ledfunc.writeToStrip(req.body);
     res.end();
     console.log('Write to strip');
+    
 });
 
 router.post('/send/strip/:colour', function (req,res){
