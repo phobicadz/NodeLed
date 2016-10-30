@@ -73,6 +73,7 @@ exports.writeToStrip = function(message) {
     if (message.animate)
     {
         loop = message.loop;
+        repeatLine = 0;
         intervalCallback = setInterval(renderOnInterval,message.interval,message);
     }
     else
@@ -115,15 +116,19 @@ function renderOnInterval(message) {
             clearTimeout(intervalCallback);
         
             if(loop) { 
-                if(bounceDirection == "up")
-                {
+                if(message.bounce && bounceDirection == "up") {
                     bounceDirection = "down";
                     repeatLine = 0;
                 } 
-                else {
+                else if (message.bounce && bounceDirection == "down") {
                     bounceDirection = "up";
                     repeatLine = 9;
                 }
+                else
+                {
+                    repeatLine = 0;
+                }
+
                 intervalCallback = setInterval(renderOnInterval,message.interval,message);
             } 
      }
@@ -133,7 +138,7 @@ function renderOnInterval(message) {
         lednumber = 0;
         pixelData = new Uint32Array(100);
         line = message.ledpage[repeatLine];
-    //    console.log(repeatLine);
+        console.log(repeatLine);
      //   console.log(bounceDirection);
  
         for(a=0;a<10;a++) {
