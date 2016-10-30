@@ -138,7 +138,7 @@ function renderOnInterval(message) {
         lednumber = 0;
         pixelData = new Uint32Array(100);
         line = message.ledpage[repeatLine];
-        console.log(repeatLine);
+        //console.log(repeatLine);
      //   console.log(bounceDirection);
  
         for(a=0;a<10;a++) {
