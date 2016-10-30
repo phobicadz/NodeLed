@@ -1,7 +1,7 @@
 nodeledApp.controller('stripController', function ($scope,$http) {
     numRows = 10; numCols = 10; ledNumber = 0;
     newPage = { "ledpage": [], "Name": "NewPage", "selectedColour": { "Color1": "rgb(255,255,255)", "Color2": "rgb(255,255,255)", "Color3": "rgb(255,255,255)", "Color4": "rgb(255,255,255)" },
-         "strip":true,"repeat":false,"interval":5000,"animate":false,"loop":false};
+         "strip":true,"repeat":true,"interval":1000,"animate":false,"loop":false,"bounce":false};
 
     $scope.leds = newPage;
     $scope.currentColour = "";
@@ -34,7 +34,7 @@ nodeledApp.controller('stripController', function ($scope,$http) {
     {
         // send and save
         $scope.dataPacket = "";
-        $scope.ledstring = JSON.stringify($scope.leds,["ledpage","id","rgb"]);
+        $scope.ledstring = JSON.stringify($scope.leds,["ledpage","id","rgb","repeat","strip","interval","animate","loop","bounce"]);
         // build string of data to send from array
       
         // Send to the api on localhost - send as json

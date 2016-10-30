@@ -7,6 +7,8 @@ ledgrid = require('hooloovoo');
 var intervalCallback;
 var repeatLine = 0;
 var loop = false;
+var bounce = false;
+var bounceDirection = "down";
 
 exports.writeToConsole =  function(message) {
     console.log(message);
@@ -67,7 +69,7 @@ exports.writeToStrip = function(message) {
     lednumber = 0;
     pixelData = new Uint32Array(100);
   
-    // check message for repeat parameter
+    // check message for animate parameter
     if (message.animate)
     {
         loop = message.loop;
@@ -77,7 +79,13 @@ exports.writeToStrip = function(message) {
     {
         // check repeat to see if first ten pixels are to be repeated
         for(a=0;a<10;a++) {
-            line = message.ledpage[a];
+            if (message.repeat == true) {
+                line = message.ledpage[0];
+            } 
+            else {
+                line = message.ledpage[a];
+            }
+            
             for(b=0;b<10;b++) {
                 rgb = line[b].rgb.substr(4).replace(')','');
                 arrRGB = rgb.split(",");
@@ -103,10 +111,19 @@ exports.writeSequenceToStrip = function(message) {
 
 function renderOnInterval(message) {
 
-     if(repeatLine == 10) {
+     if((bounceDirection == "down" && repeatLine == 10) || (bounceDirection == "up" && repeatLine == -1)) {
             clearTimeout(intervalCallback);
-            repeatLine = 0;
-            if(loop) {  
+        
+            if(loop) { 
+                if(bounceDirection == "up")
+                {
+                    bounceDirection = "down";
+                    repeatLine = 0;
+                } 
+                else {
+                    bounceDirection = "up";
+                    repeatLine = 9;
+                }
                 intervalCallback = setInterval(renderOnInterval,message.interval,message);
             } 
      }
@@ -116,20 +133,25 @@ function renderOnInterval(message) {
         lednumber = 0;
         pixelData = new Uint32Array(100);
         line = message.ledpage[repeatLine];
-
+    //    console.log(repeatLine);
+     //   console.log(bounceDirection);
+ 
         for(a=0;a<10;a++) {
-                for(b=0;b<10;b++) {
-                    rgb = line[b].rgb.substr(4).replace(')','');
-                    arrRGB = rgb.split(",");
-                    pixelData[lednumber] = rgb2Int(arrRGB[0],arrRGB[1],arrRGB[2])
-                    lednumber++;
-                }     
-            }
+                    for(b=0;b<10;b++) {
+                        rgb = line[b].rgb.substr(4).replace(')','');
+                        arrRGB = rgb.split(",");
+                        pixelData[lednumber] = rgb2Int(arrRGB[1],arrRGB[0],arrRGB[2])
+                        lednumber++;
+                    }     
+                }
+        }
 
         ledstrip.render(pixelData);
-        repeatLine ++;
-     }     
-}
+
+        if(message.bounce && bounceDirection == "up")
+        { repeatLine --; } else {  repeatLine ++; }
+       
+}     
 
 
 function rgb2Int(r, g, b) {

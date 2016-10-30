@@ -41,6 +41,26 @@
             input(ng-click='contentDialogHidden = false' type='button' value='Delete' class="btn btn-danger")
             br
             br          
+            label(for='chkRepeat') Repeat
+            | &nbsp;
+            input(id='chkRepeat' ng-model="leds.repeat" type="checkbox")
+            | &nbsp;
+            label(for='chkAnimate') Animate
+            | &nbsp;
+            input(id='chkAnimate' ng-model="leds.animate" type="checkbox")
+            | &nbsp;
+            label(for='chkLoop') Loop
+            | &nbsp;
+            input(id='chkLoop' ng-model="leds.loop" type="checkbox")
+            | &nbsp;
+            label(for='chkBounce') Bounce
+            | &nbsp;
+            input(id='chkBounce' ng-model="leds.bounce" type="checkbox")
+            br
+            br
+            label(for='txtInterval') Interval (ms)
+            input(id="txtInterval" ng-model="leds.interval" class="form-control")
+            br
             label(for='ledpageName') Name
             input(id="ledpageName" ng-model="leds.Name" class="form-control")
             br
